@@ -1,0 +1,39 @@
+/* MAIN CONTENT SECTION */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    .register-section {
+
+        .register-title-text {
+            font-size: 2.3rem;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: 500;
+            color: black;
+            margin-top: 70px;
+            padding: 15px;
+            font-style: italic;
+            text-shadow: 0 0 5px black;
+
+            span{
+                color: #a6051a;
+            }
+        }
+        .register-form {
+            padding: .25rem 1.5rem;
+        }
+    }
+}
+
+/* MEDIA QUERY SECTION */
+@media screen and (width>768px) {
+
+    .main-container {
+
+        .register-section {
+            .register-form {
+                padding: 1.25rem 10rem;
+            }
+        }
+    }
+}
