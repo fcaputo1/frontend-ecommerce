@@ -1,38 +1,96 @@
 import './ProductAdmin.css'
+import '../../styles/table.css'
+import { useForm } from 'react-hook-form'
+import '../../styles/form.css'
+import axios from 'axios'
+
+const URL = "https://66cd01308ca9aa6c8cc93b27.mockapi.io/api/v1"
 
 export default function ProductAdmin() {
+
+  const { register, handleSubmit, formState: {errors} } = useForm()
+
+  async function onProductSubmit (product) {
+    console.log(product)
+    try {
+      const prod = await axios.post(`${URL}/products`, product)
+      console.log(prod)
+    } catch (error) {
+      console.log(error)
+      //SWAL y mostrar el error
+    }
+  }
+
   return (
-    <section className="product-admin-section">
+    <>
       <h2 className="product-admin-title-text">
         <span>A</span>dministrador de Productos
       </h2>
-      <div className="add-product-button">
-        <button className="add-button">
-          <a href="#">Añadir</a>
-        </button>
-      </div>
-      <table className="product-admin-table">
-        <thead>
-          <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Fecha de ingreso</th>
-            <th>Precio</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="product-image">
-              <img
-                src="/assets/images/product/ferrari 488/ferrari-488-main-page.png"
-                alt="Ferrari 488"
-              />
-            </td>
-            <td className="product-name">Ferrari 488</td>
-            <td className="product-description">
-              El Ferrari 488 es un superdeportivo italiano con un motor V8 biturbo
+      <div className="product-admin-container">
+        <section className="product-admin-form">
+          <h2 className="product-admin-form-title"><span>A</span>ñadir Producto</h2>
+          <form onSubmit={handleSubmit(onProductSubmit)}>
+            <div className="input-group">
+              <label htmlFor="name" className="input-label">Nombre Producto</label>
+              <input type="text" {...register("name", {required:true, minLength: 3})}/>
+              { errors.name?.type === "required" && <div className="input-error">El campo es requerido</div> }
+              { errors.name?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 3</div> }
+            </div>
+            <div className="input-group">
+              <label htmlFor="price" className="input-label">Precio</label>
+              <input type="number" {...register("price", {required:true})} className="input-group"/>
+              { errors.price?.type && <div className="input-error">El campo es requerido</div> }
+            </div>
+            <div className="input-group">
+              <label htmlFor="description" className="input-label">Description</label>
+              <textarea {...register("description")} rows={5} className="input-group"/>
+            </div>
+            <div className="input-group">
+              <label htmlFor="category" className="input-label">Categoría</label>
+              <select {...register("category")} className="input-group">
+                <option value="Lujo">Autos de Lujo</option>
+                <option value="Deportivo">Auto deportivo</option>
+                <option value="SuperDeportivo">Super Deportivo</option>
+              </select>
+            </div>
+            <div className="input-group">
+              <label htmlFor="createdAt" className="input-label">Fecha de Ingreso</label>
+              <input type="date" {...register("createdAt")} className="input-group"/>
+            </div>
+            <div className="input-group">
+              <label htmlFor="image" className="input-label">Imagen</label>
+              <input type="url" {...register("image")} className="input-group"/>
+            </div>
+            <div className="input-group">
+              <button type='submit' disabled={Object.keys(errors).length !== 0}>Crear</button>
+            </div>
+          </form>
+        </section>
+
+        <section className="product-admin-section">
+          <h2 className="product-admin-table-title"><span>P</span>roductos</h2>
+          <table className="product-admin-table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Descripcion</th>
+              <th>Fecha de ingreso</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="product-image">
+                <img
+                  src="/assets/images/product/ferrari 488/ferrari-488-main-page.png"
+                  alt="Ferrari 488"
+                />
+              </td>
+              <td className="product-name">Ferrari 488</td>
+              <td className="product-description">
+                El Ferrari 488 es un superdeportivo italiano con un motor V8 biturbo
               de 3.9 litros que genera 670 caballos de fuerza. Introducido en 2015,
               acelera de 0 a 100 km/h en 3 segundos y alcanza una velocidad máxima
               de 330 km/h. Destaca por su diseño aerodinámico y avanzada tecnología,
@@ -269,6 +327,11 @@ export default function ProductAdmin() {
         <tfoot></tfoot>
       </table>
     </section>
+
+    </div>
+    
+    </>
+    
 
   )
 }

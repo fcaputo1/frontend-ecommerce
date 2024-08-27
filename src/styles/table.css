@@ -1,0 +1,106 @@
+/* MAIN TABLE SECTION */
+/* DEFINES TABLE STYLES ACCROSS ALL PROJECT */
+.product-admin-table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th {
+        padding: .75rem .5rem;
+        background-color: #a6051a;
+        color: #fed700;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    td,th {
+        border: 2px solid black;
+    }
+
+    tbody {
+
+        tr:nth-child(even){
+            background-color: #fbeda1;
+        }
+
+        .product-image{
+
+            text-align: center;
+            vertical-align: middle;
+            
+            img{
+                width: 55px;
+                height: 55px;
+                background-color: white;                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+        .product-name{
+            font-size: 1rem;
+            font-style: italic;
+            color: #a6051a;
+            text-align: center;
+        }
+        .product-description{
+            font-style: italic;
+            color: black;
+        }
+        .product-date{
+            text-align: center;
+        }
+        .product-price{
+            text-align: center;
+            color: #a6051a;
+        }
+        .product-actions {
+            text-align: center;
+
+            button.edit-button {
+                background-color: #fed700;
+                border: 1px solid black;
+                padding: 3px;
+                border-radius: 20%;
+
+                a {
+                    text-decoration: none;
+
+                    i {
+                        font-size: 20px;
+                        color: black;
+                    }
+                }
+            }
+
+            button.delete-button {
+                background-color: red;
+                border: 1px solid black;
+                padding: 3px;
+                border-radius: 20%;
+
+                a {
+                    text-decoration: none;
+
+                    i {
+                        font-size: 20px;
+                        color: black;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* MEDIA QUERY SECTION */
+@media screen and (width>500px) {
+.product-admin-table {
+    tbody {
+        .product-actions {
+            button.edit-button {
+                margin-right: 2px;
+            }
+            button.delete-button {
+                margin-left: 2px;
+            }
+        }
+    }
+}
+}
