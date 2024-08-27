@@ -7,11 +7,9 @@ import axios from 'axios'
 const URL = "https://66cd01308ca9aa6c8cc93b27.mockapi.io/api/v1"
 
 export default function ProductAdmin() {
-
   const { register, handleSubmit, formState: {errors} } = useForm()
 
   async function onProductSubmit (product) {
-    console.log(product)
     try {
       const prod = await axios.post(`${URL}/products`, product)
       console.log(prod)
@@ -20,7 +18,7 @@ export default function ProductAdmin() {
       //SWAL y mostrar el error
     }
   }
-
+  
   return (
     <>
       <h2 className="product-admin-title-text">
