@@ -2,6 +2,7 @@
 /* DEFINES TABLE STYLES ACCROSS ALL PROJECT */
 .product-admin-table {
     border-collapse: collapse;
+    flex: 1;
     width: 100%;
 
     th {
@@ -30,7 +31,8 @@
             img{
                 width: 55px;
                 height: 55px;
-                background-color: white;                object-fit: cover;
+                background-color: white;                
+                object-fit: cover;
                 border-radius: 50%;
             }
         }
@@ -43,6 +45,14 @@
         .product-description{
             font-style: italic;
             color: black;
+            width: 50%;
+
+                .desctiption-container {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    overflow: hidden;
+                    -webkit-box-orient: vertical;
+                }
         }
         .product-date{
             text-align: center;
