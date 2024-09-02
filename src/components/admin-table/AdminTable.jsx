@@ -1,7 +1,7 @@
 import '../../styles/table.css'
 import AdminRow from '../admin-row/AdminRow'
 
-export default function AdminTable({ products, deleteProduct }) {
+export default function AdminTable({ products, deleteProduct, handleEditProduct }) {
     return (
         <table className="product-admin-table">
             <thead>
@@ -17,7 +17,10 @@ export default function AdminTable({ products, deleteProduct }) {
             <tbody>
                 {
                     products.map(prod => {
-                        return <AdminRow key={prod.id} product={prod} deleteProduct={deleteProduct}/>
+                        return <AdminRow    key={prod.id} 
+                                            product={prod} 
+                                            deleteProduct={deleteProduct}
+                                            handleEditProduct={handleEditProduct}/>
                     })
                 }
             </tbody>

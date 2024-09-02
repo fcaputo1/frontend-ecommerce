@@ -1,4 +1,4 @@
-export default function AdminRow({ product, deleteProduct }) {
+export default function AdminRow({ product, deleteProduct, handleEditProduct }) {
   return (
         <tr>
             <td className="product-image">
@@ -22,10 +22,10 @@ export default function AdminRow({ product, deleteProduct }) {
                 {product.price}
             </td>
             <td className="product-actions">
-                <button className="edit-button">
+                <button className="edit-button" onClick={ () => handleEditProduct(product) }>
                     Editar
                 </button>
-                <button className="delete-button" onClick={() => deleteProduct(product.id)}>
+                <button className="delete-button" onClick={ () => deleteProduct(product.id) }>
                     Eliminar
                 </button>
             </td>

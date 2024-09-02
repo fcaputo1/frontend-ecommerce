@@ -10,11 +10,27 @@ const URL = "https://66cd01308ca9aa6c8cc93b27.mockapi.io/api/v1"
 
 export default function ProductAdmin() {
   const [ products, setProducts ] = useState([])
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm()
+  const [ selectedProduct, setSelectedProduct ] = useState(null)
+  const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm()
 
   useEffect(() => {
     getProducts()
   }, [])
+
+  useEffect(() => {
+
+    if (selectedProduct) {
+
+        setValue("name", selectedProduct.name),
+        setValue("price", selectedProduct.price),
+        setValue("description", selectedProduct.description),
+        setValue("image", selectedProduct.image),
+        setValue("category", selectedProduct.category),
+        setValue("createdAt", selectedProduct.createdAt)
+    }
+    
+
+  }, [selectedProduct])
 
   async function getProducts() {
     
@@ -62,16 +78,41 @@ function deleteProduct(id) {
 }
 
   async function onProductSubmit (product) {
-    try {
-      const prod = await axios.post(`${URL}/products`, product)
-      console.log(prod)
 
+    try {
+
+      if(selectedProduct) {
+        const { id } = selectedProduct
+        const response = await axios.put(`${URL}/products/${id}`, product)
+
+        Swal.fire({
+          title: "Actualizacion correcta",
+          text: "El producto fue actualizado correctamente",
+          icon: "success", 
+          timer: 1500
+        })
+        setSelectedProduct(null)
+
+      } else {
+        const prod = await axios.post(`${URL}/products`, product)
+        console.log(prod)
+      }
+
+      reset()
       getProducts()
 
     } catch (error) {
       console.log(error)
       //SWAL y mostrar el error
     }
+  }
+
+  function handleEditProduct(product) {
+
+    console.log('Producto a editar', product)
+
+    setSelectedProduct(product)
+
   }
   
   return (
@@ -115,14 +156,21 @@ function deleteProduct(id) {
               <input type="url" {...register("image")} className="input-group"/>
             </div>
             <div className="input-group">
-              <button type='submit' disabled={!isValid}>Crear</button>
+              <button type='submit' disabled={!isValid}>
+                {
+                  selectedProduct ? "Editar" : "Crear"
+                }
+              </button>
             </div>
           </form>
         </div>
 
         <div className="product-admin-section">
           <h2 className="product-admin-table-title"><span>P</span>roductos</h2>
-            <AdminTable products={products} deleteProduct={deleteProduct} />
+            <AdminTable products={products} 
+                        deleteProduct={deleteProduct}
+                        handleEditProduct={handleEditProduct} 
+                        />
     </div>
 
     </div>
