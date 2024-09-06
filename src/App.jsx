@@ -7,6 +7,7 @@ import Footer from "./layout/footer/Footer";
 import AboutUs from "./pages/about-us/AboutUs";
 import ProductAdmin from "./pages/product-admin/ProductAdmin"
 import Register from "./pages/register/Register"
+import ProductDetail from "./pages/product-detail/ProductDetail";
 
 export default function App() {
   return (
@@ -28,6 +29,8 @@ export default function App() {
           <Route path="/product-admin" element={ <ProductAdmin /> } />
 
           <Route path="/register" element={ <Register /> } />
+
+          <Route path="/product-detail/:id" element={ <ProductDetail /> } />
 
         </Routes>
       </main>
