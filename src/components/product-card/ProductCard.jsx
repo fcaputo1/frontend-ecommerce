@@ -1,3 +1,4 @@
+import { faCartShopping, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
@@ -33,10 +34,12 @@ export default function ProductCard({ prod }) {
                 </div>
                 <div className="card-footer">
                     <button className="buy-button">
-                        Comprar
+                        <FontAwesomeIcon icon={faCartShopping} />
                     </button>
-                    <NavLink to={`/product-detail/${prod.id}`} className="buy-button">
-                        <button className="buy-button">Detalles</button>
+                    <NavLink to={`/product-detail/${prod.id}`} className="product-detail-link">
+                        <button className="buy-button">
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
                     </NavLink>
                 </div>
             </div>

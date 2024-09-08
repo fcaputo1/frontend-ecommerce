@@ -343,16 +343,35 @@
         }
         .card-footer {
     
-            button {
+            .buy-button {
                 border-radius: 10px;
                 padding: 5px;
                 background-color: #fed700;
+                padding: 5px;
     
                 a {
                     text-decoration: none;
                     color: black;
                     font-weight: bold;
                     font-style: italic;
+                }
+            }
+
+            .product-detail-link {
+                padding: 5px;
+
+                .buy-button {
+                    border-radius: 10px;
+                    padding: 5px;
+                    background-color: #fed700;
+                    padding: 5px;
+        
+                    a {
+                        text-decoration: none;
+                        color: black;
+                        font-weight: bold;
+                        font-style: italic;
+                    }
                 }
             }
         }

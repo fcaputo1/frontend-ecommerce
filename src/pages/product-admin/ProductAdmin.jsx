@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import AdminTable from '../../components/admin-table/AdminTable'
 import Swal from 'sweetalert2'
 
-const URL = "https://66cd01308ca9aa6c8cc93b27.mockapi.io/api/v1"
+const URL = import.meta.env.VITE_SERVER_URL
 
 export default function ProductAdmin() {
   const [ products, setProducts ] = useState([])
@@ -103,7 +103,21 @@ function deleteProduct(id) {
 
     } catch (error) {
       console.log(error)
-      //SWAL y mostrar el error
+      if (selectedProduct) {
+        Swal.fire({
+          title: "Error al actualizar el producto",
+          text: "El producto no pudo ser actualizado",
+          icon: "error",
+          timer: 1500
+        })
+      } else {
+        Swal.fire({
+          title: "Error al agregar el producto",
+          text: "El producto no pudo ser agregado",
+          icon: "error", 
+          timer: 1500
+        })
+      }
     }
   }
 
@@ -126,7 +140,7 @@ function deleteProduct(id) {
           <form onSubmit={handleSubmit(onProductSubmit)}>
             <div className="input-group">
               <label htmlFor="name" className="input-label">Nombre Producto</label>
-              <input type="text" {...register("name", {required:true, minLength: 3})}/>
+              <input type="text" {...register("name", {required:true, minLength: 3, maxLength: 80})}/>
               { errors.name?.type === "required" && <div className="input-error">El campo es requerido</div> }
               { errors.name?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 3</div> }
             </div>

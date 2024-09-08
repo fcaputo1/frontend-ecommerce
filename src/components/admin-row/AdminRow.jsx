@@ -1,5 +1,9 @@
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function AdminRow({ product, deleteProduct, handleEditProduct }) {
-  return (
+  
+    return (
         <tr>
             <td className="product-image">
                 <img
@@ -23,10 +27,10 @@ export default function AdminRow({ product, deleteProduct, handleEditProduct }) 
             </td>
             <td className="product-actions">
                 <button className="edit-button" onClick={ () => handleEditProduct(product) }>
-                    Editar
+                    <FontAwesomeIcon icon={faPenToSquare} />
                 </button>
                 <button className="delete-button" onClick={ () => deleteProduct(product.id) }>
-                    Eliminar
+                    <FontAwesomeIcon icon={faTrash} />
                 </button>
             </td>
         </tr>
