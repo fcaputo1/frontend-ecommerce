@@ -8,6 +8,7 @@ import AboutUs from "./pages/about-us/AboutUs";
 import ProductAdmin from "./pages/product-admin/ProductAdmin"
 import Register from "./pages/register/Register"
 import ProductDetail from "./pages/product-detail/ProductDetail";
+import UserAdmin from "./pages/user-admin/UserAdmin";
 
 export default function App() {
   return (
@@ -27,6 +28,8 @@ export default function App() {
           <Route path="/about-us" element={ <AboutUs /> } />
 
           <Route path="/product-admin" element={ <ProductAdmin /> } />
+
+          <Route path="/user-admin" element={ <UserAdmin /> } />
 
           <Route path="/register" element={ <Register /> } />
 

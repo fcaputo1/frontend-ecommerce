@@ -23,7 +23,7 @@
             background-color: #fbeda1;
         }
 
-        .product-image{
+        .table-image{
 
             text-align: center;
             vertical-align: middle;
@@ -36,13 +36,13 @@
                 border-radius: 50%;
             }
         }
-        .product-name{
+        .table-name{
             font-size: 1rem;
             font-style: italic;
             color: #a6051a;
             text-align: center;
         }
-        .product-description{
+        .table-description{
             font-style: italic;
             color: black;
             width: 50%;
@@ -54,14 +54,14 @@
                     -webkit-box-orient: vertical;
                 }
         }
-        .product-date{
+        .table-date{
             text-align: center;
         }
-        .product-price{
+        .table-price{
             text-align: center;
             color: #a6051a;
         }
-        .product-actions {
+        .table-actions {
             text-align: center;
 
             button.edit-button {
@@ -103,7 +103,7 @@
 @media screen and (width>500px) {
 .product-admin-table {
     tbody {
-        .product-actions {
+        .table-actions {
             button.edit-button {
                 margin-right: 2px;
             }

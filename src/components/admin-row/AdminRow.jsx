@@ -5,27 +5,27 @@ export default function AdminRow({ product, deleteProduct, handleEditProduct }) 
   
     return (
         <tr>
-            <td className="product-image">
+            <td className="table-image">
                 <img
                     src={product.image}
                     alt={product.name}
                 />
             </td>
-            <td className="product-name">
+            <td className="table-name">
                 {product.name}
             </td>
-            <td className="product-description">
+            <td className="table-description">
                 <div className="description-container">
                     {product.description}
                 </div>
             </td>
-            <td className="product-date">
+            <td className="table-date">
                 {product.createdAt}
             </td>
-            <td className="product-price">
+            <td className="table-price">
                 {product.price}
             </td>
-            <td className="product-actions">
+            <td className="table-actions">
                 <button className="edit-button" onClick={ () => handleEditProduct(product) }>
                     <FontAwesomeIcon icon={faPenToSquare} />
                 </button>
