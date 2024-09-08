@@ -1,6 +1,8 @@
 import bannerImage from '../../assets/images/main/main-banner-image.jpg'
 import bannerImageSmall from '../../assets/images/main/main-banner-image-small.jpg'
 import ProductGallery from '../../components/product-gallery/ProductGallery'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBriefcase, faCompass, faToolbox } from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
 
@@ -42,17 +44,17 @@ export default function Home() {
     {/* START SERVICES SECTION */}
     <section className="services-section">
       <article className="service-card service-1">
-        <i className="fa-solid fa-compass" />
+      <FontAwesomeIcon icon={faCompass} className='fa-compass' />
         <div className="service-text-1">Retira tu auto en 24 horas</div>
       </article>
       <article className="service-card service-2">
-        <i className="fa-solid fa-shop" />
+      <FontAwesomeIcon icon={faBriefcase} className='fa-briefcase'/>
         <div className="service-text-2">
           Visitas técnicas directo a tu hogar
         </div>
       </article>
       <article className="service-card service-3">
-        <i className="fa-solid fa-toolbox" />
+        <FontAwesomeIcon icon={faToolbox} className='fa-toolbox'/>
         <div className="service-text-3">
           Servicio gratis durante el primer año
         </div>

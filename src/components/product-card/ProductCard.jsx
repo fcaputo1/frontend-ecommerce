@@ -6,10 +6,9 @@ export default function ProductCard({ prod }) {
 
     return (
         <>
-            {/* START CARD 1 */}
-            <a href="/pages/products/product.html"></a>
+            <NavLink to={`/product-detail/${prod.id}`}></NavLink>
             <article className="product-card">
-                <a href="/pages/products/product.html">
+                <NavLink to={`/product-detail/${prod.id}`}>
                     <div className="card-header">
                         <div className="product-image">
                             <img
@@ -18,19 +17,21 @@ export default function ProductCard({ prod }) {
                             />
                         </div>
                     </div>
-                </a>
+                </NavLink>
                 <div className="card-body">
-                    <a href="/pages/products/product.html"></a>
+                    <NavLink to={`/product-detail/${prod.id}`}></NavLink>
                     <div className="product-name">
-                        <a href="/pages/products/product.html"></a>
-                        <a href="/pages/products/product.html">{prod.name}</a>
+                        <NavLink to={`/product-detail/${prod.id}`} className="product-link"></NavLink>
+                        <NavLink to={`/product-detail/${prod.id}`} className="product-link">{prod.name}</NavLink>
                     </div>
                     <div className="product-entry-date">{prod.createdAt}</div>
                     <div className="product-description">
                         <p>{prod.description}</p>
                     </div>
                     <div className="product-price">
-                        <div className="product-price-number">{prod.price}</div>
+                        <div className="product-price-number">
+                            {prod.price}
+                        </div>
                     </div>
                     <div className="card-footer">
                         <button className="buy-button">
@@ -44,7 +45,6 @@ export default function ProductCard({ prod }) {
                     </div>
                 </div>
             </article>
-            {/* END CARD 1 */}
         </>
     )
 }

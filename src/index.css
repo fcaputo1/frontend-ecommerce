@@ -301,7 +301,7 @@
             padding: 10px 0;
             text-transform: capitalize;
     
-            a {
+            .product-link {
                 color: #fed700;
                 text-decoration: none;
                 overflow: hidden;
@@ -311,20 +311,26 @@
                 width: 100%;
                 display: -webkit-box;
                 -webkit-line-clamp: 1;
+                line-clamp: 1;
                 -webkit-box-orient: vertical;
                 -webkit-text-stroke: 0.7px black;
             }
         }
 
         .product-entry-date {
-            font-size: 11px;
+            font-size: 13px;
             padding-bottom: 5px;
+            color: #a6051a;
         }
     
         .product-description {
             font-size: 14px;
             display: none;
             text-align: justify;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
     
             &::first-letter {
                 color: #a6051a;
@@ -341,6 +347,7 @@
                 margin: 5px 0 5px 0;
             }
         }
+
         .card-footer {
     
             .buy-button {
@@ -349,9 +356,8 @@
                 background-color: #fed700;
                 padding: 5px;
     
-                a {
-                    text-decoration: none;
-                    color: black;
+                &:hover {
+                    box-shadow: 0 0 7px black;
                     font-weight: bold;
                     font-style: italic;
                 }
@@ -366,9 +372,8 @@
                     background-color: #fed700;
                     padding: 5px;
         
-                    a {
-                        text-decoration: none;
-                        color: black;
+                    &:hover {
+                        box-shadow: 0 0 7px black;
                         font-weight: bold;
                         font-style: italic;
                     }
@@ -402,7 +407,7 @@
     .service-1 {
         background-color: black;
 
-        i {
+        .fa-compass {
             font-size: 4rem;
             color: #fed700;
         }
@@ -415,7 +420,7 @@
     .service-2 {
         background-color: #a6051a;
 
-        i {
+        .fa-briefcase {
             font-size: 4rem;
             color: white;
         }
@@ -428,7 +433,7 @@
     .service-3 {
         background-color: black;
 
-        i {
+        .fa-toolbox {
             font-size: 4rem;
             color: #fed700;
         }

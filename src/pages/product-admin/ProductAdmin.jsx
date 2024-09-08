@@ -42,7 +42,11 @@ export default function ProductAdmin() {
 
     } catch (error) {
       console.log(error)
-      //SWAL para error
+      Swal.fire({
+        title: "Error al cargar productos",
+        text: "No se pudieron cargar los productos",
+        icon: "error"
+      })
     }
   }
 
