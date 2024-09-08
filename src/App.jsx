@@ -9,6 +9,7 @@ import ProductAdmin from "./pages/product-admin/ProductAdmin"
 import Register from "./pages/register/Register"
 import ProductDetail from "./pages/product-detail/ProductDetail";
 import UserAdmin from "./pages/user-admin/UserAdmin";
+import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 
 export default function App() {
   return (
@@ -17,6 +18,9 @@ export default function App() {
       <Header />
 
       <main className="main-container">
+
+        <ScrollToTop /> {/* Este componente ejecutará el scroll hacia arriba */}
+        
         <Routes>
 
           <Route path="/" element={ <Home /> } />
