@@ -2,7 +2,7 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function UserRow({ user, deleteUser, handleEditUser }) {
-  
+
     return (
         <tr>
             <td className="table-image">

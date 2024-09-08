@@ -9,8 +9,8 @@ import Swal from 'sweetalert2'
 const URL = import.meta.env.VITE_SERVER_URL
 
 export default function ProductAdmin() {
-  const [ products, setProducts ] = useState([])
-  const [ selectedProduct, setSelectedProduct ] = useState(null)
+  const [products, setProducts] = useState([])
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm()
 
   useEffect(() => {
@@ -28,25 +28,25 @@ export default function ProductAdmin() {
         setValue("category", selectedProduct.category),
         setValue("createdAt", selectedProduct.createdAt)
     }
-    
+
 
   }, [selectedProduct])
 
   async function getProducts() {
-    
+
     try {
       //carga de productos
       const response = await axios.get(`${URL}/products`)
-      
+
       setProducts(response.data)
-      
+
     } catch (error) {
       console.log(error)
       //SWAL para error
     }
   }
 
-function deleteProduct(id) {
+  function deleteProduct(id) {
 
     Swal.fire({
       title: "Borrar Producto",
@@ -54,20 +54,20 @@ function deleteProduct(id) {
       icon: "warning",
       showCancelButton: true,
       reverseButtons: true
-    }). then(async(result) => {
+    }).then(async (result) => {
       try {
 
-        if(result.isConfirmed) {
+        if (result.isConfirmed) {
 
           const response = await axios.delete(`${URL}/products/${id}`)
-  
+
           getProducts()
 
         }
 
       } catch (error) {
         console.log(error)
-        
+
         Swal.fire({
           title: "Error al borrar",
           text: "El producto no pudo ser eliminado",
@@ -75,20 +75,20 @@ function deleteProduct(id) {
         })
       }
     })
-}
+  }
 
-  async function onProductSubmit (product) {
+  async function onProductSubmit(product) {
 
     try {
 
-      if(selectedProduct) {
+      if (selectedProduct) {
         const { id } = selectedProduct
         const response = await axios.put(`${URL}/products/${id}`, product)
 
         Swal.fire({
           title: "Actualizacion correcta",
           text: "El producto fue actualizado correctamente",
-          icon: "success", 
+          icon: "success",
           timer: 1500
         })
         setSelectedProduct(null)
@@ -114,7 +114,7 @@ function deleteProduct(id) {
         Swal.fire({
           title: "Error al agregar el producto",
           text: "El producto no pudo ser agregado",
-          icon: "error", 
+          icon: "error",
           timer: 1500
         })
       }
@@ -122,13 +122,10 @@ function deleteProduct(id) {
   }
 
   function handleEditProduct(product) {
-
     console.log('Producto a editar', product)
-
     setSelectedProduct(product)
-
   }
-  
+
   return (
     <>
       <h2 className="product-admin-title-text">
@@ -140,18 +137,18 @@ function deleteProduct(id) {
           <form onSubmit={handleSubmit(onProductSubmit)}>
             <div className="input-group">
               <label htmlFor="name" className="input-label">Nombre Producto</label>
-              <input type="text" {...register("name", {required:true, minLength: 3, maxLength: 80})}/>
-              { errors.name?.type === "required" && <div className="input-error">El campo es requerido</div> }
-              { errors.name?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 3</div> }
+              <input type="text" {...register("name", { required: true, minLength: 3, maxLength: 80 })} />
+              {errors.name?.type === "required" && <div className="input-error">El campo es requerido</div>}
+              {errors.name?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 3</div>}
             </div>
             <div className="input-group">
               <label htmlFor="price" className="input-label">Precio</label>
-              <input type="number" {...register("price", {required:true})} className="input-group"/>
-              { errors.price?.type && <div className="input-error">El campo es requerido</div> }
+              <input type="number" {...register("price", { required: true })} className="input-group" />
+              {errors.price?.type && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <label htmlFor="description" className="input-label">Description</label>
-              <textarea {...register("description")} rows={5} className="input-group"/>
+              <textarea {...register("description")} rows={5} className="input-group" />
             </div>
             <div className="input-group">
               <label htmlFor="category" className="input-label">Categoría</label>
@@ -163,11 +160,11 @@ function deleteProduct(id) {
             </div>
             <div className="input-group">
               <label htmlFor="createdAt" className="input-label">Fecha de Ingreso</label>
-              <input type="date" {...register("createdAt")} className="input-group"/>
+              <input type="date" {...register("createdAt")} className="input-group" />
             </div>
             <div className="input-group">
               <label htmlFor="image" className="input-label">Imagen</label>
-              <input type="url" {...register("image")} className="input-group"/>
+              <input type="url" {...register("image")} className="input-group" />
             </div>
             <div className="input-group">
               <button type='submit' disabled={!isValid}>
@@ -181,16 +178,16 @@ function deleteProduct(id) {
 
         <div className="product-admin-section">
           <h2 className="product-admin-table-title"><span>P</span>roductos</h2>
-            <AdminTable products={products} 
-                        deleteProduct={deleteProduct}
-                        handleEditProduct={handleEditProduct} 
-                        />
-    </div>
+          <AdminTable products={products}
+            deleteProduct={deleteProduct}
+            handleEditProduct={handleEditProduct}
+          />
+        </div>
 
-    </div>
-    
+      </div>
+
     </>
-    
+
 
   )
 }
