@@ -95,23 +95,32 @@
             display: none;
         }
 
-        .cart-icon {
-            font-size: 1.25rem;
-            position: relative;
-            cursor: pointer;
-
-            &::after {
-                content: "";
-                width: 14px;
-                height: 14px;
-                background-color: #ffeb00;
-                position: absolute;
-                top: -8px;
-                right: -8px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+        .cart-button {
+            background: none;  
+            border: none;         
+            padding: 0;            
+            cursor: pointer;       
+            outline: none; 
+            
+            .cart-icon {
+                font-size: 1.25rem;
+                position: relative;
+                cursor: pointer;
+                color: white;
+    
+                &::after {
+                    content: "";
+                    width: 14px;
+                    height: 14px;
+                    background-color: #ffeb00;
+                    position: absolute;
+                    top: -8px;
+                    right: -8px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
         }
     } 

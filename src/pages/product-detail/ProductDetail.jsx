@@ -4,10 +4,12 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
+import { useOrder } from "../../context/OrderContext";
 
 const URL = import.meta.env.VITE_SERVER_URL
 
 export default function ProductDetail() {
+    const { addProduct } = useOrder()
     const { id } = useParams()
     const [product, setProduct] = useState([])
 
@@ -59,8 +61,8 @@ export default function ProductDetail() {
                     </div>
                     <div className="product-header-card-price">${product.price}</div>
                     <div className="product-header-card-footer">
-                        <button className="buy-button">
-                            <NavLink to={`/product-detail/${product?.id}`} className="buy-link">Comprar</NavLink>
+                        <button className="buy-button" onClick={() => addProduct(product)}>
+                            <NavLink to={`/product-detail/${product?.id}`} className="buy-link">Agregar al Carrito</NavLink>
                         </button>
                     </div>
                 </div>

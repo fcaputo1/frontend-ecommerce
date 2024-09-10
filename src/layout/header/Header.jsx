@@ -3,7 +3,7 @@ import Logo from '../../assets/images/logo/logo.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
-export default function Header() {
+export default function Header({ showModal, setToggleModal }) {
     return (
         <header className="main-header">
             <input type="checkbox" id="responsive-menu" className="input-burger" />
@@ -52,7 +52,9 @@ export default function Header() {
         {/* User Info Panel */}
         <div className="user-info">
           <span className="user-name">FRANK CAPUTO</span>
-          <FontAwesomeIcon icon={faCartShopping} className="cart-icon"/>
+          <button className='cart-button' onClick={() => setToggleModal(!showModal)}>
+            <FontAwesomeIcon icon={faCartShopping} className="cart-icon"/>
+          </button>
         </div>
       </header>
   )

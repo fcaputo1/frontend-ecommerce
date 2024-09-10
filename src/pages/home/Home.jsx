@@ -6,7 +6,6 @@ import { faBriefcase, faCompass, faToolbox } from '@fortawesome/free-solid-svg-i
 
 export default function Home() {
 
-
   return (
     <>
   {/* START BANNER SECTION */}
