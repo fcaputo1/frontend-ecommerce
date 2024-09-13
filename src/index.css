@@ -91,8 +91,18 @@
         place-content: center;
         color: #ffffff;
         font-style: italic;
-        .user-name {
-            display: none;
+
+        .avatar {
+            display: flex;
+            align-items: center;
+            padding: 0 0 0 1rem;
+            gap: 1rem;
+
+
+            img {
+                width: 34px;
+                height: 34px;
+            }
         }
 
         .cart-button {
@@ -101,12 +111,35 @@
             padding: 0;            
             cursor: pointer;       
             outline: none; 
+            position: relative;
+
+            .order-count {
+                background-color: #fed700;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .75rem;
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                right: -12px;
+                top: -12px;
+                border-radius: 50%;
+                z-index: 1;
+                color: black;
+            }
             
             .cart-icon {
                 font-size: 1.25rem;
                 position: relative;
                 cursor: pointer;
                 color: white;
+                cursor: pointer;
+                transition: color .25s ease-in-out;
+
+                &:hover {
+                    color: #fed700;
+                }
     
                 &::after {
                     content: "";

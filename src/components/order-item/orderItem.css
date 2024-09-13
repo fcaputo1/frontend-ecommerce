@@ -1,0 +1,25 @@
+.order-item {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid red;
+    }
+
+    .item-image img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .item-info {
+        font-weight: 500;
+        flex: 1;
+    }
+
+    .items-actions {
+        color: #333;
+    }
+}

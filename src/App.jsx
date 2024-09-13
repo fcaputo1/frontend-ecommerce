@@ -15,14 +15,12 @@ import { useState } from "react";
 
 export default function App() {
   
-  const [toggleModal, setToggleModal ] = useState(false)
-  
   return (
     <>
       
-      <OrderDialog showModal={toggleModal} setToggleModal={setToggleModal}/>
+      <OrderDialog />
 
-      <Header showModal={toggleModal} setToggleModal={setToggleModal}/>
+      <Header />
 
       <main className="main-container">
 

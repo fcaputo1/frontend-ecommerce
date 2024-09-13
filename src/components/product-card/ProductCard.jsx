@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useOrder } from "../../context/OrderContext";
 
 export default function ProductCard({ prod }) {
-    const { addProduct } = useOrder()
+    const { addOrderItem } = useOrder()
 
     return (
         <>
@@ -36,7 +36,7 @@ export default function ProductCard({ prod }) {
                         </div>
                     </div>
                     <div className="card-footer">
-                        <button className="buy-button" onClick={() => addProduct(prod)}>
+                        <button className="buy-button" onClick={() => addOrderItem(prod)}>
                             <FontAwesomeIcon icon={faCartShopping} />
                         </button>
                         <NavLink to={`/product-detail/${prod.id}`} className="product-detail-link">
