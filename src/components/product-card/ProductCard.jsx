@@ -8,36 +8,38 @@ export default function ProductCard({ prod }) {
 
     return (
         <>
-            <NavLink to={`/product-detail/${prod.id}`}></NavLink>
+            <NavLink to={`/product-detail/${prod?.id}`}></NavLink>
             <article className="product-card">
-                <NavLink to={`/product-detail/${prod.id}`}>
+                <NavLink to={`/product-detail/${prod?.id}`}>
                     <div className="card-header">
                         <div className="product-image">
                             <img
-                                src={prod.image}
-                                alt={prod.image}
+                                src={prod?.image}
+                                alt={prod?.image}
                             />
                         </div>
                     </div>
                 </NavLink>
                 <div className="card-body">
-                    <NavLink to={`/product-detail/${prod.id}`}></NavLink>
+                    <NavLink to={`/product-detail/${prod?.id}`}></NavLink>
                     <div className="product-name">
-                        <NavLink to={`/product-detail/${prod.id}`} className="product-link"></NavLink>
-                        <NavLink to={`/product-detail/${prod.id}`} className="product-link">{prod.name}</NavLink>
+                        <NavLink to={`/product-detail/${prod?.id}`} className="product-link"></NavLink>
+                        <NavLink to={`/product-detail/${prod?.id}`} className="product-link">{prod?.name}</NavLink>
                     </div>
-                    <div className="product-entry-date">
-                        {new Date(prod?.createdAt).toLocaleDateString('es-ES')}
+                    <div className="product-data-container">
+                        <button className="product-category">
+                            {prod?.category}
+                        </button>
+                        <div className="product-entry-date">
+                            {new Date(prod?.createdAt).toLocaleDateString('es-ES')}
+                        </div>
                     </div>
-                    <button className="product-category">
-                        {prod.category}
-                    </button>
                     <div className="product-description">
-                        <p>{prod.description}</p>
+                        {prod?.description}
                     </div>
                     <div className="product-price">
                         <div className="product-price-number">
-                            ${Number(prod.price)?.toLocaleString('es-ES', {
+                            ${Number(prod?.price).toLocaleString('es-ES', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             })}
