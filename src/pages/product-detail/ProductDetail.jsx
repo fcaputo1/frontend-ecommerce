@@ -59,7 +59,17 @@ export default function ProductDetail() {
                             {product?.description}
                         </p>
                     </div>
-                    <div className="product-header-card-price">${product.price}</div>
+                    <div className="product-header-internal-container">
+                        <button className="product-header-category">
+                            {product.category}
+                        </button>
+                        <div className="product-header-card-price">
+                        ${Number(product.price)?.toLocaleString('es-ES', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        })}
+                        </div>
+                    </div>
                     <div className="product-header-card-footer">
                         <button className="buy-button" onClick={() => addProduct(product)}>
                             <NavLink to={`/product-detail/${product?.id}`} className="buy-link">Agregar al Carrito</NavLink>

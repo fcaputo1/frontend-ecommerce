@@ -23,7 +23,10 @@ export default function AdminRow({ product, deleteProduct, handleEditProduct }) 
                 {product.createdAt}
             </td>
             <td className="table-price">
-                {product.price}
+                ${Number(product.price)?.toLocaleString('es-ES', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}
             </td>
             <td className="table-actions">
                 <button className="edit-button" onClick={ () => handleEditProduct(product) }>

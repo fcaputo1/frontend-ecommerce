@@ -60,6 +60,7 @@
                     color: #a6051a;
                 }
             }
+
             .product-header-card-description {
                 text-align: justify;
                 padding: 20px;
@@ -71,12 +72,29 @@
                 }
             }
 
-            .product-header-card-price {
-                color: #a6051a;
-                font-weight: 700;
-                font-size: 20px;
-                margin-left: 20px;
-                margin-top: 10px;
+            .product-header-internal-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .product-header-category {
+                    padding: 5px;
+                    margin-left: 40px;
+                    margin-top: 10px;
+                    background-color: #a6051a;
+                    color: white;
+                    border-radius: 5px;
+                    font-weight: 700;
+                    font-style: italic;
+                }
+
+                .product-header-card-price {
+                    color: #a6051a;
+                    font-weight: 700;
+                    font-size: 20px;
+                    margin-top: 10px;
+                    margin-right: 40px;
+                }
             }
 
             .product-header-card-footer {

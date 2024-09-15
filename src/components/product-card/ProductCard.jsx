@@ -26,13 +26,21 @@ export default function ProductCard({ prod }) {
                         <NavLink to={`/product-detail/${prod.id}`} className="product-link"></NavLink>
                         <NavLink to={`/product-detail/${prod.id}`} className="product-link">{prod.name}</NavLink>
                     </div>
-                    <div className="product-entry-date">{prod.createdAt}</div>
+                    <div className="product-entry-date">
+                        {prod.createdAt}
+                    </div>
+                    <button className="product-category">
+                        {prod.category}
+                    </button>
                     <div className="product-description">
                         <p>{prod.description}</p>
                     </div>
                     <div className="product-price">
                         <div className="product-price-number">
-                            {prod.price}
+                            ${Number(prod.price)?.toLocaleString('es-ES', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            })}
                         </div>
                     </div>
                     <div className="card-footer">
