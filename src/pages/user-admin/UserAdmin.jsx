@@ -231,7 +231,11 @@ export default function UserAdmin() {
                             <textarea {...register("observations")} rows={5} defaultValue={""} />
                         </div>
                         <div className="input-group">
-                            <button type="submit" disabled={!isValid}>Registrarse</button>
+                            <button type="submit" disabled={!isValid}>
+                            {
+                                selectedUser ? "Editar" : "Registrar"
+                            }
+                            </button>
                         </div>
                     </form>
                 </div>
