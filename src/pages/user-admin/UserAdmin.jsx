@@ -96,6 +96,13 @@ export default function UserAdmin() {
             } else {
                 const userData = await axios.post(`${URL}/users`, user)
                 console.log(userData)
+
+                Swal.fire({
+                    title: "Usuario Registrado",
+                    text: "El usuario fue registrado correctamente",
+                    icon: "success",
+                    timer: 1500
+                })
             }
 
             reset()

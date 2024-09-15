@@ -100,6 +100,13 @@ export default function ProductAdmin() {
       } else {
         const prod = await axios.post(`${URL}/products`, product)
         console.log(prod)
+
+        Swal.fire({
+          title: "Producto Registrado",
+          text: "El producto fue registrado correctamente",
+          icon: "success",
+          timer: 1500
+      })
       }
 
       reset()

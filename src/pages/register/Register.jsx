@@ -24,6 +24,13 @@ export default function Register() {
         const newUser = await axios.post(`${URL}/users`, userData)
         console.log(user)
 
+        Swal.fire({
+          title: "Usuario Registrado",
+          text: "El usuario fue registrado correctamente",
+          icon: "success",
+          timer: 1500
+      })
+
       reset()
 
     } catch (error) {
