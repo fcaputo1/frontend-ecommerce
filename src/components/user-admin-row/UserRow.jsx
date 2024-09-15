@@ -7,28 +7,28 @@ export default function UserRow({ user, deleteUser, handleEditUser }) {
         <tr>
             <td className="table-image">
                 <img
-                    src={user.avatar}
-                    alt={user.name}
+                    src={user?.avatar}
+                    alt={user?.name}
                 />
             </td>
             <td className="table-name">
-                {user.name}
+                {user?.name}
             </td>
             <td className="table-date">
-                {user.email}
+                {user?.email}
             </td>
             <td className="table-date">
-                {user.birthday}
+                {new Date(user?.birthday).toLocaleDateString('es-ES')}
             </td>
             <td className="table-date">
-                {user.password}
+                {user?.password}
             </td>
             <td className="table-date">
-                {user.country}
+                {user?.country}
             </td>
             <td className="table-description">
                 <div className="description-container">
-                    {user.observations}
+                    {user?.observations}
                 </div>
             </td>
             <td className="table-actions">

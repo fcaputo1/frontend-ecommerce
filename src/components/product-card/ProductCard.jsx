@@ -27,7 +27,7 @@ export default function ProductCard({ prod }) {
                         <NavLink to={`/product-detail/${prod.id}`} className="product-link">{prod.name}</NavLink>
                     </div>
                     <div className="product-entry-date">
-                        {prod.createdAt}
+                        {new Date(prod?.createdAt).toLocaleDateString('es-ES')}
                     </div>
                     <button className="product-category">
                         {prod.category}
