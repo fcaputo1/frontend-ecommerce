@@ -30,11 +30,20 @@ form {
             font-weight: bold;
             font-size: 1rem;
             margin-bottom: 10px;
+            cursor: pointer;
 
             &:hover {
                 text-decoration: none;
                 color: white;
-                box-shadow: 0 0 15px #ffeb00;
+                box-shadow: 0 0 5px #ffeb00;
+            }
+
+            &:disabled {
+                color: white;
+                box-shadow: none;
+                background-color: #494949;
+                border-color: #494949;
+                cursor: not-allowed;
             }
         }
         .input-error {

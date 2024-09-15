@@ -11,7 +11,6 @@ import ProductDetail from "./pages/product-detail/ProductDetail";
 import UserAdmin from "./pages/user-admin/UserAdmin";
 import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 import OrderDialog from "./components/order-dialog/OrderDialog";
-import { useState } from "react";
 
 export default function App() {
   

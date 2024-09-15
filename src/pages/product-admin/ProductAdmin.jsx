@@ -152,11 +152,11 @@ export default function ProductAdmin() {
             </div>
             <div className="input-group">
               <label htmlFor="description" className="input-label">Description</label>
-              <textarea {...register("description")} rows={5} className="input-group" />
+              <textarea {...register("description", {required:true})} rows={5} className="input-group" />
             </div>
             <div className="input-group">
               <label htmlFor="category" className="input-label">Categoría</label>
-              <select {...register("category")} className="input-group">
+              <select {...register("category", {required:true})} className="input-group">
                 <option value="Lujo">Autos de Lujo</option>
                 <option value="Deportivo">Auto deportivo</option>
                 <option value="SuperDeportivo">Super Deportivo</option>
@@ -164,11 +164,11 @@ export default function ProductAdmin() {
             </div>
             <div className="input-group">
               <label htmlFor="createdAt" className="input-label">Fecha de Ingreso</label>
-              <input type="date" {...register("createdAt")} className="input-group" />
+              <input type="date" {...register("createdAt", {required:true})} className="input-group" />
             </div>
             <div className="input-group">
               <label htmlFor="image" className="input-label">Imagen</label>
-              <input type="url" {...register("image")} className="input-group" />
+              <input type="url" {...register("image", {required:true})} className="input-group" />
             </div>
             <div className="input-group">
               <button type='submit' disabled={!isValid}>

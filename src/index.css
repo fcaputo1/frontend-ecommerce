@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 2rem;
-    position: fixed;
+    position: sticky;
     width: 100%;
     top: 0;
     z-index: 1;
@@ -95,7 +95,7 @@
         .avatar {
             display: flex;
             align-items: center;
-            padding: 0 0 0 1rem;
+            padding: 0 0 0 1.25rem;
             gap: 1rem;
 
 
@@ -127,6 +127,8 @@
                 border-radius: 50%;
                 z-index: 1;
                 color: black;
+                font-weight: 500;
+                text-align: center;
             }
             
             .cart-icon {
@@ -140,20 +142,7 @@
                 &:hover {
                     color: #fed700;
                 }
-    
-                &::after {
-                    content: "";
-                    width: 14px;
-                    height: 14px;
-                    background-color: #ffeb00;
-                    position: absolute;
-                    top: -8px;
-                    right: -8px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
+
             }
         }
     } 
@@ -219,7 +208,7 @@
     position: relative;
     height: 400px;
     max-width: 100%;
-    top: 44px;
+    top: 0;
 
     img {
         width: 100%;
