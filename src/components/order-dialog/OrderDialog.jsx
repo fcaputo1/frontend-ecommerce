@@ -13,10 +13,11 @@ export default function OrderDialog() {
 
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
 
-                <div className="modal-header">Titulo del Modal</div>
+                <div className="modal-header">
+                    <span>O</span>rden de <span>C</span>ompras
+                </div>
 
                 <div className="modal-body">
-
                     <ul className='order-list'>
                         {
                             order.map(item => (
@@ -25,16 +26,18 @@ export default function OrderDialog() {
                         }
                     </ul>
                     <div className='list-total'>
-                            $ {total}
+                            $ {total?.toLocaleString('es-ES', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            })}
                     </div>
-
                 </div>
 
                 <div className="modal-footer">
-                    <button onClick={() => setToggleModal(!toggleModal)}>
+                    <button className='close-modal-btn'onClick={() => setToggleModal(!toggleModal)}>
                         Cerrar
                     </button>
-                    <button>
+                    <button className='finalize-shopping-btn'>
                         Finalizar Compra
                     </button>
                 </div>

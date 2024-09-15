@@ -17,9 +17,29 @@
     .item-info {
         font-weight: 500;
         flex: 1;
+        padding: 15px;
+        vertical-align: middle;
+        color: black;
+        font-style: italic;
+        text-shadow: 0 0 1px black;
+
+        &::first-letter{
+            color: #a6051a;
+        }
     }
 
-    .items-actions {
-        color: #333;
+    .item-count{
+        font-weight: 700;
+        color: black;
+        padding-right: 10px;
+    }
+
+    .item-actions {
+        color: #a6051a;
+        cursor: pointer;
+
+        &:hover {
+            color: #fed700;
+        }
     }
 }

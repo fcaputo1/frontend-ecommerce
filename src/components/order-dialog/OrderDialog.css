@@ -14,25 +14,44 @@
     animation: showIn 1s ease-in-out forwards;
 
     .modal-content {
-        background-color: white;
-        color: red;
+        background-color: #dddbdc;
+        color: #a6051a;
         padding: 1rem;
         border-radius: .25rem;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
         width: calc(100% - 4rem);
         max-width: 600px;
         opacity: 0;
         transition: opacity .3s ease-in-out;
         animation: fadeIn .3s ease-in-out forwards;
+        border-radius: 10px;
+        border: 3px solid black;
 
         .modal-header {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-align: center;
+            color: black;
+            padding: 15px;
+            font-style: italic;
+            text-shadow: 0 0 5px black;
+
+            span{
+                color: #a6051a;
+            }
         }
 
         .modal-body {
             margin-bottom: 1rem;
+
+            .list-total{
+                font-weight: 700;
+                text-align: end;
+                text-shadow: 0 0 .3px black;
+                color: black;
+            }
 
             .order-list {
                 list-style: none;
@@ -41,9 +60,29 @@
                     padding: .25rem 1rem;
 
                     &:not(:last-child) {
-                        border-bottom: 1px solid #DDDDDDAA;
+                        border-bottom: 1px solid rgb(123, 123, 123);
                     }
                 }
+            }
+        }
+
+        .modal-footer {
+
+            .finalize-shopping-btn {
+                border-radius: 10px;
+                padding: 5px;
+                background-color: #fed700;
+                margin-right: 10px;
+                font-weight: 700;
+            }
+
+            .close-modal-btn {
+                border-radius: 10px;
+                padding: 5px;
+                background-color: #a6051a;
+                margin-right: 10px;
+                font-weight: 700;
+                color: white;
             }
         }
     }
