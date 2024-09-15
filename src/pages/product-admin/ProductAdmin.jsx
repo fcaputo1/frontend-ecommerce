@@ -11,7 +11,7 @@ const URL = import.meta.env.VITE_SERVER_URL
 export default function ProductAdmin() {
   const [products, setProducts] = useState([])
   const [selectedProduct, setSelectedProduct] = useState(null)
-  const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm()
+  const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm({mode:"onChange"})
 
   useEffect(() => {
     getProducts()
@@ -162,6 +162,7 @@ export default function ProductAdmin() {
             <div className="input-group">
               <label htmlFor="description" className="input-label">Description</label>
               <textarea {...register("description", {required:true})} rows={5} className="input-group" />
+              {errors.description?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <label htmlFor="category" className="input-label">Categoría</label>
@@ -170,14 +171,17 @@ export default function ProductAdmin() {
                 <option value="Deportivo">Auto deportivo</option>
                 <option value="SuperDeportivo">Super Deportivo</option>
               </select>
+              {errors.category?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <label htmlFor="createdAt" className="input-label">Fecha de Ingreso</label>
               <input type="date" {...register("createdAt", {required:true})} className="input-group" />
+              {errors.createdAt?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <label htmlFor="image" className="input-label">Imagen</label>
               <input type="url" {...register("image", {required:true})} className="input-group" />
+              {errors.image?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <button type='submit' disabled={!isValid}>

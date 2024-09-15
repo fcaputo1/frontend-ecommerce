@@ -9,7 +9,7 @@ const URL = import.meta.env.VITE_SERVER_URL
 
 export default function Register() {
 
-  const { register, watch, setFocus, reset, handleSubmit, formState: { errors, isValid } } = useForm({mode: "all"})
+  const { register, watch, setFocus, reset, handleSubmit, formState: { errors, isValid } } = useForm({mode: "onChange"})
 
   useEffect(() => {
     setFocus("name")
@@ -36,8 +36,8 @@ export default function Register() {
     } catch (error) {
       console.log(error)
         Swal.fire({
-          title: "Error al agregar el usuario",
-          text: "El usuario no pudo ser agregado",
+          title: "Error al registrar el usuario",
+          text: "El usuario no pudo ser registrado",
           icon: "error", 
           timer: 1500
         })

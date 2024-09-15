@@ -11,7 +11,7 @@ const URL = import.meta.env.VITE_SERVER_URL
 export default function UserAdmin() {
     const [users, setUsers] = useState([])
     const [selectedUser, setSelectedUser] = useState(null)
-    const { register, setValue, reset, watch, handleSubmit, formState: { errors, isValid } } = useForm()
+    const { register, setValue, reset, watch, handleSubmit, formState: { errors, isValid } } = useForm({mode: "onChange"})
 
     useEffect(() => {
         getUsers()
@@ -220,6 +220,7 @@ export default function UserAdmin() {
                                 <option value="UY">Uruguay</option>
                                 <option value="VE">Venezuela</option>
                             </select>
+                            {errors.country?.type === "required" && <div className="input-error">El campo es requerido</div>}
                         </div>
                         <div className="input-group">
                             <label htmlFor="avatar" className="input-label">

@@ -1,7 +1,27 @@
 import './Contact.css'
 import '../../styles/form.css'
+import { useForm } from 'react-hook-form'
+import Swal from 'sweetalert2'
+import { useEffect } from 'react'
 
 export default function Contact() {
+
+  const { register, setFocus, reset, handleSubmit, formState: { errors, isValid } } = useForm({mode:"onChange"})
+
+  useEffect(() => {
+    setFocus("name")
+  }, [setFocus])
+
+  function onContactSubmit(){
+    //Placeholder para función que guarda los intentos de contacto
+    Swal.fire({
+      title: "Gracias",
+      text: "Nos estaremos contactando a la brevedad posible",
+      icon: "success",
+      timer: 1500
+  })
+  reset()
+  }
   return (
     <section className="contact-section">
       <h2 className="contact-title-text">
@@ -23,49 +43,40 @@ export default function Contact() {
       <div className="contact-location-container">
         <div className="contact-form">
           <h2 className="contact-form-title">FORMULARIO CONTACTO</h2>
-          <form action="">
+          <form onSubmit={handleSubmit(onContactSubmit)}>
             <div className="input-group">
-              <label htmlFor="fullname" className="input-label">
+              <label htmlFor="name" className="input-label">
                 Nombre Completo
               </label>
               <input
-                type="text"
-                name="fullname"
-                id="fullname"
-                required=""
-                minLength={4}
-                maxLength={80}
-                autoFocus=""
+                type="text" {...register("name", {required: true, minLength: 4, maxLength: 80})}
               />
+              { errors.name?.type === "required" && <div className="input-error">El campo es requerido</div> }
+              { errors.name?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div> }
+              { errors.name?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 80</div> }
             </div>
             <div className="input-group">
               <label htmlFor="email" className="input-label">
-              Correo Electrónico
+                Correo Electrónico
               </label>
               <input
-                type="email"
-                name="email"
-                id="email"
-                required=""
-                minLength={4}
-                maxLength={90}
-                placeholder="ejemplo@correo.com"
-                pattern="[A-Za-z0-9._+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
+                type="email" {...register("email", {required: true, minLength: 4, maxLength: 90, pattern: {value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/}})}
               />
+              { errors.email?.type === "required" && <div className="input-error">El campo es requerido</div> }
+              { errors.email?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div> }
+              { errors.email?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 90</div> }
+              { errors.email?.type === "pattern" && <div className="input-error">Ingrese un email válido</div> }
             </div>
             <div className="input-group">
               <label htmlFor="observations" className="input-label">
-                Observaciones
+              Observaciones
               </label>
-              <textarea
-                name="observations"
-                id="observations"
-                rows={5}
-                defaultValue={""}
+              <textarea {...register("observations", {required:true})} rows={5} defaultValue={""}
               />
+              { errors.observations?.type === "required" && <div className="input-error">El campo es requerido</div> }
             </div>
             <div className="input-group">
-              <button type="submit">Enviar</button>
+              <button type="submit" disabled={!isValid}>Enviar</button>
             </div>
           </form>
         </div>
