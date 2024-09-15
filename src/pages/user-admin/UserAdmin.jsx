@@ -25,7 +25,7 @@ export default function UserAdmin() {
                 setValue("avatar", selectedUser.avatar),
                 setValue("country", selectedUser.country),
                 setValue("birthday", selectedUser.birthday),
-                setValue("observations", selectedUser.birthday),
+                setValue("observations", selectedUser.observations),
                 setValue("repeatpassword", selectedUser.password)
         }
     }, [selectedUser])
@@ -47,7 +47,7 @@ export default function UserAdmin() {
         }
     }
 
-    //Eliminar
+    //Eliminar usuarios
     function deleteUser(id) {
 
         Swal.fire({
@@ -77,6 +77,7 @@ export default function UserAdmin() {
         })
     }
 
+    //Agregar o actualizar usuarios
     async function onUserSubmit(user) {
 
         try {
@@ -128,6 +129,7 @@ export default function UserAdmin() {
         }
     }
 
+    //Editar usuarios
     function handleEditUser(user) {
 
         console.log('Usuario a editar', user)
@@ -142,6 +144,7 @@ export default function UserAdmin() {
                 <span>A</span>dministrador de Usuarios
             </h2>
             <div className="product-admin-container">
+                {/* START FORM */}
                 <div className="product-admin-form">
                     <h2 className="product-admin-form-title"><span>C</span>rear Usuario</h2>
                     <form onSubmit={handleSubmit(onUserSubmit)}>
@@ -239,14 +242,17 @@ export default function UserAdmin() {
                         </div>
                     </form>
                 </div>
+                {/* END FORM */}
 
                 <div className="product-admin-section">
+                    {/* START USER TABLE */}
                     <h2 className="product-admin-table-title"><span>U</span>suarios</h2>
                     <UserTable users={users}
                         deleteUser={deleteUser}
                         handleEditUser={handleEditUser}
                     />
                 </div>
+                {/* END USER TABLE */}
 
             </div>
 

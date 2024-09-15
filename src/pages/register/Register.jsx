@@ -17,10 +17,10 @@ export default function Register() {
 
   async function onUserSubmit (user) {
 
+    //Enviar la contraseña una sola vez a el backend
     const { repeatpassword, ...userData } = user
 
     try {
-
         const newUser = await axios.post(`${URL}/users`, userData)
         console.log(user)
 
@@ -49,6 +49,7 @@ export default function Register() {
       <h2 className="register-title-text">
         <span>R</span>egistro
       </h2>
+      {/* START FORM */}
       <div className="register-form">
         <form onSubmit={handleSubmit(onUserSubmit)}>
           <div className="input-group">
@@ -89,6 +90,7 @@ export default function Register() {
             <label htmlFor="repeatpassword" className="input-label">
               Repetir Contraseña
             </label>
+            {/*Entre las validaciones verifico que el password repetido coincida con el original usando watch*/}
             <input
               type="password" {...register("repeatpassword", {required: true, minLength: 4, maxLength: 16, validate: (value) =>
                 value === watch("password") || "Las contraseñas no coinciden"})}
@@ -140,6 +142,7 @@ export default function Register() {
           </div>
         </form>
       </div>
+      {/* END FORM */}
     </section>
   )
 }

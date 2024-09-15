@@ -32,12 +32,11 @@ export default function ProductAdmin() {
 
   }, [selectedProduct])
 
+  //Traer productos desde el backend
   async function getProducts() {
 
     try {
-      //carga de productos
       const response = await axios.get(`${URL}/products`)
-
       setProducts(response.data)
 
     } catch (error) {
@@ -50,6 +49,7 @@ export default function ProductAdmin() {
     }
   }
 
+  //Eliminar productos
   function deleteProduct(id) {
 
     Swal.fire({
@@ -80,7 +80,7 @@ export default function ProductAdmin() {
       }
     })
   }
-
+  //Agregar o Editar productos
   async function onProductSubmit(product) {
 
     try {
@@ -132,6 +132,7 @@ export default function ProductAdmin() {
     }
   }
 
+  //Editar Productos
   function handleEditProduct(product) {
     console.log('Producto a editar', product)
     setSelectedProduct(product)
@@ -143,6 +144,7 @@ export default function ProductAdmin() {
         <span>A</span>dministrador de Productos
       </h2>
       <div className="product-admin-container">
+        {/* START FORM */}
         <div className="product-admin-form">
           <h2 className="product-admin-form-title"><span>A</span>ñadir Producto</h2>
           <form onSubmit={handleSubmit(onProductSubmit)}>
@@ -186,14 +188,17 @@ export default function ProductAdmin() {
             </div>
           </form>
         </div>
+        {/* END FORM */}
 
         <div className="product-admin-section">
+          {/* START PRODUCT ADMIN TABLE */}
           <h2 className="product-admin-table-title"><span>P</span>roductos</h2>
           <AdminTable products={products}
             deleteProduct={deleteProduct}
             handleEditProduct={handleEditProduct}
           />
         </div>
+        {/* END PRODUCT ADMIN TABLE */}
 
       </div>
 
