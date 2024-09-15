@@ -48,7 +48,7 @@
     .product-admin-section {
         display: flex;
         flex-direction: column;
-        /* overflow-x: scroll; */
+        overflow-x: scroll;
         width: 100%;
 
         .product-admin-table-title {
