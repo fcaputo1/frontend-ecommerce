@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import './product.css'
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -9,7 +9,7 @@ import { useOrder } from "../../context/OrderContext";
 const URL = import.meta.env.VITE_SERVER_URL
 
 export default function ProductDetail() {
-    const { addProduct } = useOrder()
+    const { addOrderItem } = useOrder()
     const { id } = useParams()
     const [product, setProduct] = useState([])
 
@@ -71,12 +71,19 @@ export default function ProductDetail() {
                         </div>
                     </div>
                     <div className="product-header-card-footer">
-                        <button className="buy-button" onClick={() => addProduct(product)}>
-                            <NavLink to={`/product-detail/${product?.id}`} className="buy-link">Agregar al Carrito</NavLink>
+                        <button className="buy-button" onClick={() => addOrderItem(product)}>
+                            Agregar al Carrito
                         </button>
                     </div>
                 </div>
             </section>
+            <section className="main-product-info">
+            <ul>
+                <li>
+                    {product?.description} 
+                </li>
+            </ul>
+        </section>
         </>
     )
 }

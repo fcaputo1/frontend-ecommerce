@@ -74,6 +74,12 @@
                 background-color: #fed700;
                 margin-right: 10px;
                 font-weight: 700;
+
+                &:hover {
+                    box-shadow: 0 0 7px black;
+                    font-weight: bold;
+                    font-style: italic;
+                }
             }
 
             .close-modal-btn {
@@ -83,6 +89,12 @@
                 margin-right: 10px;
                 font-weight: 700;
                 color: white;
+
+                &:hover {
+                    box-shadow: 0 0 7px black;
+                    font-weight: bold;
+                    font-style: italic;
+                }
             }
         }
     }
