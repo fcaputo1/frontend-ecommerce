@@ -11,7 +11,7 @@ const URL = import.meta.env.VITE_SERVER_URL
 export default function ProductDetail() {
     const { addOrderItem } = useOrder()
     const { id } = useParams()
-    const [product, setProduct] = useState([])
+    const [ product, setProduct ] = useState([])
 
     useEffect(() => {
         getProduct()

@@ -6,7 +6,8 @@ const URL = import.meta.env.VITE_SERVER_URL
 
 export default function ProductGallery() {
 
-    const [ products, setProducts] = useState([])
+    const [ products, setProducts ] = useState([])
+    
     useEffect(() => {
         getProducts()
     }, [])

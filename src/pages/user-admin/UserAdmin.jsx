@@ -9,8 +9,8 @@ import UserTable from '../../components/user-admin-table/UserTable'
 const URL = import.meta.env.VITE_SERVER_URL
 
 export default function UserAdmin() {
-    const [users, setUsers] = useState([])
-    const [selectedUser, setSelectedUser] = useState(null)
+    const [ users, setUsers ] = useState([])
+    const [ selectedUser, setSelectedUser ] = useState(null)
     const { register, setValue, reset, watch, handleSubmit, formState: { errors, isValid } } = useForm({mode: "onChange"})
 
     useEffect(() => {
@@ -20,13 +20,13 @@ export default function UserAdmin() {
     useEffect(() => {
         if (selectedUser) {
             setValue("name", selectedUser.name),
-                setValue("email", selectedUser.email),
-                setValue("password", selectedUser.password),
-                setValue("avatar", selectedUser.avatar),
-                setValue("country", selectedUser.country),
-                setValue("birthday", selectedUser.birthday),
-                setValue("observations", selectedUser.observations),
-                setValue("repeatpassword", selectedUser.password)
+            setValue("email", selectedUser.email),
+            setValue("password", selectedUser.password),
+            setValue("avatar", selectedUser.avatar),
+            setValue("country", selectedUser.country),
+            setValue("birthday", selectedUser.birthday),
+            setValue("observations", selectedUser.observations),
+            setValue("repeatpassword", selectedUser.password)
         }
     }, [selectedUser])
 

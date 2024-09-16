@@ -7,10 +7,10 @@ export const useOrder = () => useContext(OrderContext)
 
 export default function OrderProvider({ children }) {
 
-    const [count, setCount] = useState(0)
-    const [total, setTotal] = useState(0)
-    const [order, setOrder] = useState([])
-    const [toggleModal, setToggleModal ] = useState(false)
+    const [ count, setCount ] = useState(0)
+    const [ total, setTotal ] = useState(0)
+    const [ order, setOrder ] = useState([])
+    const [ toggleModal, setToggleModal ] = useState(false)
 
     useEffect(() => {
         calculateCount()
@@ -34,7 +34,6 @@ export default function OrderProvider({ children }) {
             product.quantity = 1
             setOrder([ ...order, product ])
         }
-
         Swal.fire({
             position: 'center',
             icon: 'success',

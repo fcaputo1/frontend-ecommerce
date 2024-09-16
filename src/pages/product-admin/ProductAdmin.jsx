@@ -9,9 +9,9 @@ import Swal from 'sweetalert2'
 const URL = import.meta.env.VITE_SERVER_URL
 
 export default function ProductAdmin() {
-  const [products, setProducts] = useState([])
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm({mode:"onChange"})
+  const [ products, setProducts ] = useState([])
+  const [ selectedProduct, setSelectedProduct ] = useState(null)
+  const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
 
   useEffect(() => {
     getProducts()
@@ -20,13 +20,12 @@ export default function ProductAdmin() {
   useEffect(() => {
 
     if (selectedProduct) {
-
-        setValue("name", selectedProduct.name),
-        setValue("price", selectedProduct.price),
-        setValue("description", selectedProduct.description),
-        setValue("image", selectedProduct.image),
-        setValue("category", selectedProduct.category),
-        setValue("createdAt", selectedProduct.createdAt)
+      setValue("name", selectedProduct.name),
+      setValue("price", selectedProduct.price),
+      setValue("description", selectedProduct.description),
+      setValue("image", selectedProduct.image),
+      setValue("category", selectedProduct.category),
+      setValue("createdAt", selectedProduct.createdAt)
     }
 
 
@@ -106,7 +105,7 @@ export default function ProductAdmin() {
           text: "El producto fue registrado correctamente",
           icon: "success",
           timer: 1500
-      })
+        })
       }
 
       reset()
@@ -161,12 +160,12 @@ export default function ProductAdmin() {
             </div>
             <div className="input-group">
               <label htmlFor="description" className="input-label">Description</label>
-              <textarea {...register("description", {required:true})} rows={5} className="input-group" />
+              <textarea {...register("description", { required: true })} rows={5} className="input-group" />
               {errors.description?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <label htmlFor="category" className="input-label">Categoría</label>
-              <select {...register("category", {required:true})} className="input-group">
+              <select {...register("category", { required: true })} className="input-group">
                 <option value="Lujo">Autos de Lujo</option>
                 <option value="Deportivo">Auto deportivo</option>
                 <option value="SuperDeportivo">Super Deportivo</option>
@@ -175,12 +174,12 @@ export default function ProductAdmin() {
             </div>
             <div className="input-group">
               <label htmlFor="createdAt" className="input-label">Fecha de Ingreso</label>
-              <input type="date" {...register("createdAt", {required:true})} className="input-group" />
+              <input type="date" {...register("createdAt", { required: true })} className="input-group" />
               {errors.createdAt?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <label htmlFor="image" className="input-label">Imagen</label>
-              <input type="url" {...register("image", {required:true})} className="input-group" />
+              <input type="url" {...register("image", { required: true })} className="input-group" />
               {errors.image?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">

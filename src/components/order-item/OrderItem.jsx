@@ -6,13 +6,13 @@ export default function OrderItem({ item }) {
   return (
     <li className="order-item">
         <div className="item-image">
-            <img src={item.image} alt="" />
+            <img src={item?.image} alt="" />
         </div>
         <div className="item-info">
-            {item.name}
+            {item?.name}
         </div>
         <div className="item-count">
-            {item.quantity}
+            {item?.quantity}
         </div>
         <div className="item-actions">
             <FontAwesomeIcon icon={faTrash} />
