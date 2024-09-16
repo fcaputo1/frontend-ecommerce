@@ -139,7 +139,6 @@
                 position: relative;
                 cursor: pointer;
                 color: white;
-                cursor: pointer;
                 transition: color .25s ease-in-out;
 
                 &:hover {

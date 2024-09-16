@@ -66,28 +66,6 @@
             }
         }
 
-        .add-product-button {
-            display: flex;
-            width: 100%;
-            justify-content: right;
-            overflow-x:auto;
-        
-            .add-button {
-                border-radius: 10px;
-                padding: 5px;
-                background-color: #fed700;
-                margin-right: 10px;
-
-                a {
-                    text-decoration: none;
-                    color: black;
-                    font-weight: bold;
-                    font-style: italic;
-                    font-size: 18px;
-                }
-            }
-        }
-
         .product-admin-table {
             display: block;
             margin-top: 30px;
