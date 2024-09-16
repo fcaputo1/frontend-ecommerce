@@ -90,7 +90,6 @@
     .user-info {
         place-content: center;
         color: #ffffff;
-        font-style: italic;
         display: flex;
         flex-direction: row;
         align-items: center;
