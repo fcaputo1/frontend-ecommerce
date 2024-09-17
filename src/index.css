@@ -140,6 +140,7 @@
                 cursor: pointer;
                 color: white;
                 transition: color .25s ease-in-out;
+                
 
                 &:hover {
                     color: #fed700;

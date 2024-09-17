@@ -12,10 +12,24 @@ export default function OrderProvider({ children }) {
     const [ order, setOrder ] = useState([])
     const [ toggleModal, setToggleModal ] = useState(false)
 
+    //Carga orden desde Local Storage
     useEffect(() => {
-        calculateCount()
-        calculateTotal()
-    }, [order])
+        const storedOrder = localStorage.getItem("order");
+        if (storedOrder) {
+            setOrder(JSON.parse(storedOrder));
+        }
+    }, []);
+
+    //Guarda la orden en Local Storage y calcula Totales
+    useEffect(() => {
+        if (order.length > 0) {
+            localStorage.setItem("order", JSON.stringify(order));
+        } else {
+            localStorage.removeItem("order");  // Elimina el localStorage si no hay productos
+        }
+        calculateCount();
+        calculateTotal();
+    }, [order]);
 
     //Añadir productos a la orden
     function addOrderItem(product) {
@@ -65,11 +79,13 @@ export default function OrderProvider({ children }) {
         setTotal(total)
     }
 
+    //Remover item de la orden
     function removeItemFromOrder(id) {
         const orderFiltered = order.filter(prod => prod.id !== id)
         setOrder(orderFiltered)
     }
 
+    //Cambiar cantidad de un item en la orden
     function changeItemQuantity(id, quantity) {
         const product = order.find(prod => prod.id === id)
         product.quantity = quantity
