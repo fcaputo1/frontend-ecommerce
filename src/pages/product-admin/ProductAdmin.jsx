@@ -155,8 +155,9 @@ export default function ProductAdmin() {
             </div>
             <div className="input-group">
               <label htmlFor="price" className="input-label">Precio</label>
-              <input type="number" {...register("price", { required: true })} className="input-group" />
-              {errors.price?.type && <div className="input-error">El campo es requerido</div>}
+              <input type="number" {...register("price", { required: true})} min={0} className="input-group" />
+              {errors.price?.type === "required" && <div className="input-error">El campo es requerido</div>}
+              {errors.price?.type === "min" && <div className="input-error">El precio mínimo es 0</div>}
             </div>
             <div className="input-group">
               <label htmlFor="description" className="input-label">Description</label>

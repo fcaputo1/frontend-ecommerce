@@ -26,7 +26,7 @@ export default function OrderDialog() {
                         }
                     </ul>
                     <div className='list-total'>
-                            $ {total?.toLocaleString('es-ES', {
+                        <span className='total-text'>TOTAL </span> <span className='total-sign'>$ </span>{total?.toLocaleString('es-ES', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
                             })}

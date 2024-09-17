@@ -32,14 +32,27 @@
         font-weight: 700;
         color: black;
         padding-right: 10px;
+
+        .item-input {
+            width: 6ch;
+            border: 2px solid black;
+        }
     }
 
     .item-actions {
-        color: #a6051a;
-        cursor: pointer;
 
-        &:hover {
-            color: #fed700;
+        .btn-item {
+            border-radius: 5px;
+            padding: 3px;
+            background-color: #fed700;
+            margin-right: 10px;
+            font-weight: 700;
+            
+            &:hover {
+                box-shadow: 0 0 7px black;
+                font-weight: bold;
+                font-style: italic;
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ export default function OrderProvider({ children }) {
         calculateTotal()
     }, [order])
 
+    //Añadir productos a la orden
     function addOrderItem(product) {
 
         console.log("Add product", product.name)
@@ -43,6 +44,8 @@ export default function OrderProvider({ children }) {
         })
 
     }
+
+    //Caalcular cantidad de items
     function calculateCount() {
         let quantityItems = 0
 
@@ -52,6 +55,7 @@ export default function OrderProvider({ children }) {
         setCount(quantityItems)
     }
 
+    //Calcular total de la orden
     function calculateTotal() {
         let total = 0
 
@@ -59,6 +63,17 @@ export default function OrderProvider({ children }) {
             total += item.price * item.quantity
         })
         setTotal(total)
+    }
+
+    function removeItemFromOrder(id) {
+        const orderFiltered = order.filter(prod => prod.id !== id)
+        setOrder(orderFiltered)
+    }
+
+    function changeItemQuantity(id, quantity) {
+        const product = order.find(prod => prod.id === id)
+        product.quantity = quantity
+        setOrder([ ...order])
     }
 
     return (
@@ -69,7 +84,9 @@ export default function OrderProvider({ children }) {
                 toggleModal,
                 setToggleModal, 
                 count, 
-                total
+                total,
+                removeItemFromOrder, 
+                changeItemQuantity
             }}
         >
             { children }

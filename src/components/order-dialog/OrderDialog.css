@@ -26,6 +26,7 @@
         animation: fadeIn .3s ease-in-out forwards;
         border-radius: 10px;
         border: 3px solid black;
+        transform: translateY(50px);
 
         .modal-header {
             font-size: 1.5rem;
@@ -47,10 +48,18 @@
             margin-bottom: 1rem;
 
             .list-total{
-                font-weight: 700;
+                font-weight: 500;
                 text-align: end;
-                text-shadow: 0 0 .3px black;
+                text-shadow: 0 0 .1px black;
                 color: black;
+
+                .total-text {
+                    font-weight: 400;
+                    font-style: italic;
+                }
+                .total-sign {
+                    color: #a6051a;
+                }
             }
 
             .order-list {
@@ -109,5 +118,6 @@
 @keyframes fadeIn {
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
