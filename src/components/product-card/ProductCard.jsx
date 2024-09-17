@@ -31,7 +31,7 @@ export default function ProductCard({ prod }) {
                             {prod?.category}
                         </button>
                         <div className="product-entry-date">
-                            {new Date(prod?.createdAt).toLocaleDateString('es-ES')}
+                            {new Date(prod?.createdAt.replace(/-/g, '/')).toLocaleDateString('es-ES')}
                         </div>
                     </div>
                     <div className="product-description">

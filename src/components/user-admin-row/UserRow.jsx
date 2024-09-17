@@ -18,7 +18,7 @@ export default function UserRow({ user, deleteUser, handleEditUser }) {
                 {user?.email}
             </td>
             <td className="table-date">
-                {new Date(user?.birthday).toLocaleDateString('es-ES')}
+                {new Date(user?.birthday.replace(/-/g, '/')).toLocaleDateString('es-ES')}
             </td>
             <td className="table-date">
                 {user?.password}

@@ -20,7 +20,8 @@ export default function AdminRow({ product, deleteProduct, handleEditProduct }) 
                 </div>
             </td>
             <td className="table-date">
-                {new Date(product?.createdAt).toLocaleDateString('es-ES')}
+                {new Date(product?.createdAt.replace(/-/g, '/')).toLocaleDateString('es-ES')}
+
             </td>
             <td className="table-price">
                 ${Number(product?.price).toLocaleString('es-ES', {
