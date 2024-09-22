@@ -57,17 +57,14 @@ export default function UserAdmin() {
             showCancelButton: true,
             reverseButtons: true
         }).then(async (result) => {
-            try {
 
+            try {
                 if (result.isConfirmed) {
                     const response = await axios.delete(`${URL}/users/${id}`)
                     getUsers()
-
                 }
-
             } catch (error) {
                 console.log(error)
-
                 Swal.fire({
                     title: "Error al borrar",
                     text: "El usuario no pudo ser eliminado",
@@ -81,7 +78,6 @@ export default function UserAdmin() {
     async function onUserSubmit(user) {
 
         try {
-
             if (selectedUser) {
                 const { id } = selectedUser
                 const response = await axios.put(`${URL}/users/${id}`, user)
@@ -131,11 +127,8 @@ export default function UserAdmin() {
 
     //Editar usuarios
     function handleEditUser(user) {
-
         console.log('Usuario a editar', user)
-
         setSelectedUser(user)
-
     }
 
     return (

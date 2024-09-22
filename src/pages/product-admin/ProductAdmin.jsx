@@ -59,18 +59,12 @@ export default function ProductAdmin() {
       reverseButtons: true
     }).then(async (result) => {
       try {
-
         if (result.isConfirmed) {
-
           const response = await axios.delete(`${URL}/products/${id}`)
-
           getProducts()
-
         }
-
       } catch (error) {
         console.log(error)
-
         Swal.fire({
           title: "Error al borrar",
           text: "El producto no pudo ser eliminado",
@@ -79,6 +73,7 @@ export default function ProductAdmin() {
       }
     })
   }
+  
   //Agregar o Editar productos
   async function onProductSubmit(product) {
 

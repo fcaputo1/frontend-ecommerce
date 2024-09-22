@@ -22,7 +22,7 @@ export default function Register() {
 
     try {
       const newUser = await axios.post(`${URL}/users`, userData)
-      console.log(user)
+      console.log(userData)
 
       Swal.fire({
         title: "Usuario Registrado",
