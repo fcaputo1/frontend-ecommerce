@@ -9,8 +9,8 @@ import Swal from 'sweetalert2'
 const URL = import.meta.env.VITE_SERVER_URL
 
 export default function ProductAdmin() {
-  const [ products, setProducts ] = useState([])
-  const [ selectedProduct, setSelectedProduct ] = useState(null)
+  const [products, setProducts] = useState([])
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
 
   useEffect(() => {
@@ -21,11 +21,11 @@ export default function ProductAdmin() {
 
     if (selectedProduct) {
       setValue("name", selectedProduct.name),
-      setValue("price", selectedProduct.price),
-      setValue("description", selectedProduct.description),
-      setValue("image", selectedProduct.image),
-      setValue("category", selectedProduct.category),
-      setValue("createdAt", selectedProduct.createdAt)
+        setValue("price", selectedProduct.price),
+        setValue("description", selectedProduct.description),
+        setValue("image", selectedProduct.image),
+        setValue("category", selectedProduct.category),
+        setValue("createdAt", selectedProduct.createdAt)
     }
 
 
@@ -155,12 +155,12 @@ export default function ProductAdmin() {
             </div>
             <div className="input-group">
               <label htmlFor="price" className="input-label">Precio</label>
-              <input type="number" {...register("price", { required: true})} min={0} className="input-group" />
+              <input type="number" {...register("price", { required: true })} min={1} className="input-group" />
               {errors.price?.type === "required" && <div className="input-error">El campo es requerido</div>}
               {errors.price?.type === "min" && <div className="input-error">El precio mínimo es 0</div>}
             </div>
             <div className="input-group">
-              <label htmlFor="description" className="input-label">Description</label>
+              <label htmlFor="description" className="input-label">Descripción</label>
               <textarea {...register("description", { required: true })} rows={5} className="input-group" />
               {errors.description?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
@@ -179,10 +179,26 @@ export default function ProductAdmin() {
               {errors.createdAt?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
-              <label htmlFor="image" className="input-label">Imagen</label>
-              <input type="url" {...register("image", { required: true })} className="input-group" />
-              {errors.image?.type === "required" && <div className="input-error">El campo es requerido</div>}
+              <label htmlFor="image" className="input-label">
+                Imagen
+              </label>
+              <input
+                type="url"
+                {...register("image", {
+                  required: true,
+                  pattern: {
+                    value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
+                  }
+                })}
+              />
+              {errors.image?.type === "required" && (
+                <div className="input-error">El campo es requerido</div>
+              )}
+              {errors.image?.type === "pattern" && (
+                <div className="input-error">El campo no contiene una URL válida</div>
+              )}
             </div>
+
             <div className="input-group">
               <button type='submit' disabled={!isValid}>
                 {

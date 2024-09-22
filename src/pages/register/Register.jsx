@@ -9,40 +9,40 @@ const URL = import.meta.env.VITE_SERVER_URL
 
 export default function Register() {
 
-  const { register, watch, setFocus, reset, handleSubmit, formState: { errors, isValid } } = useForm({mode: "onChange"})
+  const { register, watch, setFocus, reset, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
 
   useEffect(() => {
     setFocus("name")
   }, [setFocus])
 
-  async function onUserSubmit (user) {
+  async function onUserSubmit(user) {
 
     //Enviar la contraseña una sola vez a el backend
     const { repeatpassword, ...userData } = user
 
     try {
-        const newUser = await axios.post(`${URL}/users`, userData)
-        console.log(user)
+      const newUser = await axios.post(`${URL}/users`, userData)
+      console.log(user)
 
-        Swal.fire({
-          title: "Usuario Registrado",
-          text: "El usuario fue registrado correctamente",
-          icon: "success",
-          timer: 1500
+      Swal.fire({
+        title: "Usuario Registrado",
+        text: "El usuario fue registrado correctamente",
+        icon: "success",
+        timer: 1500
       })
 
       reset()
 
     } catch (error) {
       console.log(error)
-        Swal.fire({
-          title: "Error al registrar el usuario",
-          text: "El usuario no pudo ser registrado",
-          icon: "error", 
-          timer: 1500
-        })
-      }
+      Swal.fire({
+        title: "Error al registrar el usuario",
+        text: "El usuario no pudo ser registrado",
+        icon: "error",
+        timer: 1500
+      })
     }
+  }
 
   return (
     <section className="register-section">
@@ -57,34 +57,34 @@ export default function Register() {
               Nombre Completo
             </label>
             <input
-              type="text" {...register("name", {required: true, minLength: 4, maxLength: 80})}
+              type="text" {...register("name", { required: true, minLength: 4, maxLength: 80 })}
             />
-            { errors.name?.type === "required" && <div className="input-error">El campo es requerido</div> }
-            { errors.name?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div> }
-            { errors.name?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 80</div> }
+            {errors.name?.type === "required" && <div className="input-error">El campo es requerido</div>}
+            {errors.name?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div>}
+            {errors.name?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 80</div>}
           </div>
           <div className="input-group">
             <label htmlFor="email" className="input-label">
               Correo Electrónico
             </label>
             <input
-              type="email" {...register("email", {required: true, minLength: 4, maxLength: 90, pattern: {value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/}})}
+              type="email" {...register("email", { required: true, minLength: 4, maxLength: 90, pattern: { value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/ } })}
             />
-            { errors.email?.type === "required" && <div className="input-error">El campo es requerido</div> }
-            { errors.email?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div> }
-            { errors.email?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 90</div> }
-            { errors.email?.type === "pattern" && <div className="input-error">Ingrese un email válido</div> }
+            {errors.email?.type === "required" && <div className="input-error">El campo es requerido</div>}
+            {errors.email?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div>}
+            {errors.email?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 90</div>}
+            {errors.email?.type === "pattern" && <div className="input-error">Ingrese un email válido</div>}
           </div>
           <div className="input-group">
             <label htmlFor="password" className="input-label">
               Contraseña
             </label>
             <input
-              type="password" {...register("password", {required: true, minLength: 4, maxLength: 16})}
+              type="password" {...register("password", { required: true, minLength: 4, maxLength: 16 })}
             />
-            { errors.password?.type === "required" && <div className="input-error">El campo es requerido</div> }
-            { errors.password?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div> }
-            { errors.password?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 16</div> }
+            {errors.password?.type === "required" && <div className="input-error">El campo es requerido</div>}
+            {errors.password?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div>}
+            {errors.password?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 16</div>}
           </div>
           <div className="input-group">
             <label htmlFor="repeatpassword" className="input-label">
@@ -92,28 +92,30 @@ export default function Register() {
             </label>
             {/*Entre las validaciones verifico que el password repetido coincida con el original usando watch*/}
             <input
-              type="password" {...register("repeatpassword", {required: true, minLength: 4, maxLength: 16, validate: (value) =>
-                value === watch("password") || "Las contraseñas no coinciden"})}
+              type="password" {...register("repeatpassword", {
+                required: true, minLength: 4, maxLength: 16, validate: (value) =>
+                  value === watch("password") || "Las contraseñas no coinciden"
+              })}
             />
-            { errors.repeatpassword?.type === "required" && <div className="input-error">El campo es requerido</div> }
-            { errors.repeatpassword?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div> }
-            { errors.repeatpassword?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 16</div> }
-            { errors.repeatpassword?.message && <div className="input-error">{errors.repeatpassword.message}</div> }
+            {errors.repeatpassword?.type === "required" && <div className="input-error">El campo es requerido</div>}
+            {errors.repeatpassword?.type === "minLength" && <div className="input-error">Mínimo de caracteres es 4</div>}
+            {errors.repeatpassword?.type === "maxLength" && <div className="input-error">Máximo de caracteres es 16</div>}
+            {errors.repeatpassword?.message && <div className="input-error">{errors.repeatpassword.message}</div>}
           </div>
           <div className="input-group">
             <label htmlFor="birthday" className="input-label">
               Fecha de Nacimiento
             </label>
             <input
-              type="date" {...register("birthday", {required: true})}
+              type="date" {...register("birthday", { required: true })}
             />
-            { errors.birthday?.type === "required" && <div className="input-error">El campo es requerido</div> }
+            {errors.birthday?.type === "required" && <div className="input-error">El campo es requerido</div>}
           </div>
           <div className="input-group">
             <label htmlFor="country" className="input-label">
               Seleccione su País
             </label>
-            <select {...register("country", {required:true})}>
+            <select {...register("country", { required: true })}>
               <option value="" />
               <option value="AR">Argentina</option>
               <option value="CH">Chile</option>
@@ -125,10 +127,16 @@ export default function Register() {
             </select>
           </div>
           <div className="input-group">
-            <label htmlFor="avatar" className="input-label">
-              Avatar
-            </label>
-            <input type="url" {...register("avatar")} />
+            <label htmlFor="avatar" className="input-label">Avatar</label>
+            <input
+              type="url"
+              {...register("avatar", {
+                pattern: {
+                  value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
+                }
+              })}
+            />
+            {errors.avatar?.type === "pattern" && <div className="input-error">Por favor ingresa una URL válida</div>}
           </div>
           <div className="input-group">
             <label htmlFor="observations" className="input-label">
