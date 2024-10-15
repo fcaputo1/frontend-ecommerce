@@ -21,9 +21,6 @@ export default function UserRow({ user, deleteUser, handleEditUser }) {
                 {new Date(user?.birthday.replace(/-/g, '/')).toLocaleDateString('es-ES')}
             </td>
             <td className="table-date">
-                {user?.password}
-            </td>
-            <td className="table-date">
                 {user?.country}
             </td>
             <td className="table-description">

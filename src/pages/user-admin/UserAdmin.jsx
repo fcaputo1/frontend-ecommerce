@@ -5,13 +5,15 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import UserTable from '../../components/user-admin-table/UserTable'
+import { useUser } from '../../context/UserContext'
 
-const URL = import.meta.env.VITE_SERVER_URL
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function UserAdmin() {
     const [users, setUsers] = useState([])
     const [selectedUser, setSelectedUser] = useState(null)
     const { register, setValue, reset, watch, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
+    const { token } = useUser()
 
     useEffect(() => {
         getUsers()
@@ -34,7 +36,11 @@ export default function UserAdmin() {
     async function getUsers() {
 
         try {
-            const response = await axios.get(`${URL}/users`)
+            const response = await axios.get(`${URL}/users`, {
+                headers: {
+                    Authorization: token
+                }
+            })
             setUsers(response.data)
 
         } catch (error) {
@@ -60,7 +66,11 @@ export default function UserAdmin() {
 
             try {
                 if (result.isConfirmed) {
-                    const response = await axios.delete(`${URL}/users/${id}`)
+                    const response = await axios.delete(`${URL}/users/${id}`, {
+                        headers: {
+                            Authorization: token
+                        }
+                    })
                     getUsers()
                 }
             } catch (error) {

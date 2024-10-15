@@ -10,7 +10,6 @@ export default function UserTable({ users, deleteUser, handleEditUser }) {
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Fecha de nacimiento</th>
-                    <th>Contraseña</th>
                     <th>País</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
@@ -19,7 +18,7 @@ export default function UserTable({ users, deleteUser, handleEditUser }) {
             <tbody>
                 {
                     users.map(userData => {
-                        return <UserRow     key={userData.id} 
+                        return <UserRow     key={userData._id} 
                                             user={userData} 
                                             deleteUser={deleteUser}
                                             handleEditUser={handleEditUser}/>
