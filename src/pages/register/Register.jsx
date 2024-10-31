@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { useEffect } from 'react'
 import axios from 'axios'
 
-const URL = import.meta.env.VITE_SERVER_URL
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function Register() {
 
@@ -17,12 +17,21 @@ export default function Register() {
 
   async function onUserSubmit(user) {
 
-    //Enviar la contraseña una sola vez a el backend
-    const { repeatpassword, ...userData } = user
-
     try {
-      const newUser = await axios.post(`${URL}/users`, userData)
-      console.log(userData)
+      const formData = new FormData()
+      formData.append("name", user.name)
+      formData.append("email", user.email)
+      formData.append("password", user.password)
+      formData.append("birthday", user.birthday)
+      formData.append("country", user.country)
+      if(user.avatar[0]) {
+        formData.append("avatar", user.avatar[0])
+      }
+      formData.append("observations", user.observations)
+
+      const newUser = await axios.post(`${URL}/users`, formData)
+      console.log(formData.avatar)
+      
 
       Swal.fire({
         title: "Usuario Registrado",
@@ -129,14 +138,10 @@ export default function Register() {
           <div className="input-group">
             <label htmlFor="avatar" className="input-label">Avatar</label>
             <input
-              type="url"
-              {...register("avatar", {
-                pattern: {
-                  value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-                }
-              })}
+              type="file"
+              accept="image/*"
+              {...register("avatar")}
             />
-            {errors.avatar?.type === "pattern" && <div className="input-error">Por favor ingresa una URL válida</div>}
           </div>
           <div className="input-group">
             <label htmlFor="observations" className="input-label">

@@ -54,7 +54,7 @@ export default function UserAdmin() {
     }
 
     //Eliminar usuarios
-    function deleteUser(id) {
+    function deleteUser(_id) {
 
         Swal.fire({
             title: "Borrar Usuario",
@@ -66,7 +66,7 @@ export default function UserAdmin() {
 
             try {
                 if (result.isConfirmed) {
-                    const response = await axios.delete(`${URL}/users/${id}`, {
+                    const response = await axios.delete(`${URL}/users/${_id}`, {
                         headers: {
                             Authorization: token
                         }
@@ -88,9 +88,21 @@ export default function UserAdmin() {
     async function onUserSubmit(user) {
 
         try {
+
+            const formData = new FormData()
+            formData.append("name", user.name)
+            formData.append("email", user.email)
+            formData.append("password", user.password)
+            formData.append("birthday", user.birthday)
+            formData.append("country", user.country)
+            if(user.avatar[0]) {
+                formData.append("avatar", user.avatar[0])
+            }
+            formData.append("observations", user.observations)
+
             if (selectedUser) {
                 const { id } = selectedUser
-                const response = await axios.put(`${URL}/users/${id}`, user)
+                const response = await axios.put(`${URL}/users/${id}`, formData)
 
                 Swal.fire({
                     title: "Actualizacion correcta",
@@ -101,7 +113,7 @@ export default function UserAdmin() {
                 setSelectedUser(null)
 
             } else {
-                const userData = await axios.post(`${URL}/users`, user)
+                const userData = await axios.post(`${URL}/users`, formData)
                 console.log(userData)
 
                 Swal.fire({
@@ -228,14 +240,10 @@ export default function UserAdmin() {
                         <div className="input-group">
                             <label htmlFor="avatar" className="input-label">Avatar</label>
                             <input
-                                type="url"
-                                {...register("avatar", {
-                                    pattern: {
-                                        value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-                                    }
-                                })}
+                                type="file"
+                                accept="image/*"
+                                {...register("avatar")}
                             />
-                            {errors.avatar?.type === "pattern" && <div className="input-error">Por favor ingresa una URL válida</div>}
                         </div>
                         <div className="input-group">
                             <label htmlFor="observations" className="input-label">

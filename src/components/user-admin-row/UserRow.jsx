@@ -1,5 +1,8 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { formatDate } from "../../utils/formatDate";
+
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function UserRow({ user, deleteUser, handleEditUser }) {
 
@@ -7,7 +10,7 @@ export default function UserRow({ user, deleteUser, handleEditUser }) {
         <tr>
             <td className="table-image">
                 <img
-                    src={user?.avatar}
+                    src={`${URL}/images/users/${user.avatar}`}
                     alt={user?.name}
                 />
             </td>
@@ -18,7 +21,7 @@ export default function UserRow({ user, deleteUser, handleEditUser }) {
                 {user?.email}
             </td>
             <td className="table-date">
-                {new Date(user?.birthday.replace(/-/g, '/')).toLocaleDateString('es-ES')}
+                {formatDate(user?.birthday)}
             </td>
             <td className="table-date">
                 {user?.country}
@@ -32,7 +35,7 @@ export default function UserRow({ user, deleteUser, handleEditUser }) {
                 <button className="edit-button" onClick={ () => handleEditUser(user) }>
                     <FontAwesomeIcon icon={faPenToSquare} />
                 </button>
-                <button className="delete-button" onClick={ () => deleteUser(user.id) }>
+                <button className="delete-button" onClick={ () => deleteUser(user._id) }>
                     <FontAwesomeIcon icon={faTrash} />
                 </button>
             </td>

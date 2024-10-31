@@ -6,15 +6,17 @@ import { useEffect, useState } from 'react'
 import AdminTable from '../../components/admin-table/AdminTable'
 import Swal from 'sweetalert2'
 
-const URL = import.meta.env.VITE_SERVER_URL
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function ProductAdmin() {
   const [products, setProducts] = useState([])
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [ categories, setCategories ] = useState([])
   const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
 
   useEffect(() => {
     getProducts()
+    getCategories()
   }, [])
 
   useEffect(() => {
@@ -30,6 +32,22 @@ export default function ProductAdmin() {
 
 
   }, [selectedProduct])
+
+  async function getCategories() {
+    try {
+      const response = await axios.get(`${URL}/categories`)
+      console.log(response.data)
+      setCategories(response.data.categories)
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error al cargar las categorías",
+        text: "No se pudieron cargar las categorías",
+        icon: "error",
+        timer: 1500
+      })
+    }
+  }
 
   //Traer productos desde el backend
   async function getProducts() {
@@ -49,7 +67,7 @@ export default function ProductAdmin() {
   }
 
   //Eliminar productos
-  function deleteProduct(id) {
+  function deleteProduct(_id) {
 
     Swal.fire({
       title: "Borrar Producto",
@@ -60,7 +78,7 @@ export default function ProductAdmin() {
     }).then(async (result) => {
       try {
         if (result.isConfirmed) {
-          const response = await axios.delete(`${URL}/products/${id}`)
+          const response = await axios.delete(`${URL}/products/${_id}`)
           getProducts()
         }
       } catch (error) {
@@ -79,9 +97,18 @@ export default function ProductAdmin() {
 
     try {
 
+      const formData = new FormData()
+      formData.append("name", product.name)
+      formData.append("price", product.price)
+      formData.append("description", product.description)
+      formData.append("category", product.category)
+      if(product.image[0]) {
+        formData.append("image", product.image[0])
+      }
+
       if (selectedProduct) {
-        const { id } = selectedProduct
-        const response = await axios.put(`${URL}/products/${id}`, product)
+        const { _id } = selectedProduct
+        const response = await axios.put(`${URL}/products/${_id}`, formData)
 
         Swal.fire({
           title: "Actualizacion correcta",
@@ -92,7 +119,7 @@ export default function ProductAdmin() {
         setSelectedProduct(null)
 
       } else {
-        const prod = await axios.post(`${URL}/products`, product)
+        const prod = await axios.post(`${URL}/products`, formData)
         console.log(prod)
 
         Swal.fire({
@@ -162,9 +189,11 @@ export default function ProductAdmin() {
             <div className="input-group">
               <label htmlFor="category" className="input-label">Categoría</label>
               <select {...register("category", { required: true })} className="input-group">
-                <option value="Lujo">Autos de Lujo</option>
-                <option value="Deportivo">Auto deportivo</option>
-                <option value="SuperDeportivo">Super Deportivo</option>
+                {
+                  categories.map(cat => (
+                    <option key={cat._id} value={cat.name}>{ cat.viewValue }</option>
+                  ))
+                }
               </select>
               {errors.category?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
@@ -178,12 +207,10 @@ export default function ProductAdmin() {
                 Imagen
               </label>
               <input
-                type="url"
+                type="file"
+                accept="image/*"
                 {...register("image", {
-                  required: true,
-                  pattern: {
-                    value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-                  }
+                  required: true
                 })}
               />
               {errors.image?.type === "required" && (

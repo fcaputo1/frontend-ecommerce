@@ -1,5 +1,8 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { formatDate } from "../../utils/formatDate";
+
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function AdminRow({ product, deleteProduct, handleEditProduct }) {
   
@@ -7,7 +10,7 @@ export default function AdminRow({ product, deleteProduct, handleEditProduct }) 
         <tr>
             <td className="table-image">
                 <img
-                    src={product?.image}
+                    src={`${URL}/images/products/${product.image}`}
                     alt={product?.name}
                 />
             </td>
@@ -20,7 +23,7 @@ export default function AdminRow({ product, deleteProduct, handleEditProduct }) 
                 </div>
             </td>
             <td className="table-date">
-                {new Date(product?.createdAt.replace(/-/g, '/')).toLocaleDateString('es-ES')}
+                {formatDate(product?.createdAt)}
 
             </td>
             <td className="table-price">
@@ -33,7 +36,7 @@ export default function AdminRow({ product, deleteProduct, handleEditProduct }) 
                 <button className="edit-button" onClick={ () => handleEditProduct(product) }>
                     <FontAwesomeIcon icon={faPenToSquare} />
                 </button>
-                <button className="delete-button" onClick={ () => deleteProduct(product?.id) }>
+                <button className="delete-button" onClick={ () => deleteProduct(product?._id) }>
                     <FontAwesomeIcon icon={faTrash} />
                 </button>
             </td>
