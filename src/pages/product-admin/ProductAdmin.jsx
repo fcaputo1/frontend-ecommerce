@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import AdminTable from '../../components/admin-table/AdminTable'
 import Swal from 'sweetalert2'
+import { useUser } from '../../context/UserContext'
 
 const URL = import.meta.env.VITE_LOCAL_SERVER
 
@@ -13,6 +14,7 @@ export default function ProductAdmin() {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [ categories, setCategories ] = useState([])
   const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
+  const { token } = useUser()
 
   useEffect(() => {
     getProducts()
@@ -94,64 +96,66 @@ export default function ProductAdmin() {
   
   //Agregar o Editar productos
   async function onProductSubmit(product) {
-
     try {
-
-      const formData = new FormData()
-      formData.append("name", product.name)
-      formData.append("price", product.price)
-      formData.append("description", product.description)
-      formData.append("category", product.category)
-      if(product.image[0]) {
-        formData.append("image", product.image[0])
+      const formData = new FormData();
+      formData.append("name", product.name);
+      formData.append("price", product.price);
+      formData.append("description", product.description);
+      formData.append("category", product.category);
+  
+      // Verificar y agregar la imagen
+      if (product.image && product.image[0]) {
+        formData.append("image", product.image[0]);
+      } else {
+        console.log("No se seleccionó ninguna imagen.");
       }
-
+  
       if (selectedProduct) {
-        const { _id } = selectedProduct
-        const response = await axios.put(`${URL}/products/${_id}`, formData)
-
+        const { _id } = selectedProduct;
+        await axios.put(`${URL}/products/${_id}`, formData, {
+          headers: {
+            Authorization: token
+          }
+        });
+  
         Swal.fire({
-          title: "Actualizacion correcta",
+          title: "Actualización correcta",
           text: "El producto fue actualizado correctamente",
           icon: "success",
           timer: 1500
-        })
-        setSelectedProduct(null)
-
+        });
+        setSelectedProduct(null); // Limpiar el producto seleccionado después de la edición
       } else {
-        const prod = await axios.post(`${URL}/products`, formData)
-        console.log(prod)
-
+        await axios.post(`${URL}/products`, formData, {
+          headers: {
+            Authorization: token
+          }
+        });
+  
         Swal.fire({
           title: "Producto Registrado",
           text: "El producto fue registrado correctamente",
           icon: "success",
           timer: 1500
-        })
+        });
       }
-
-      reset()
-      getProducts()
-
+  
+      reset(); // Reiniciar el formulario
+      getProducts(); // Refrescar la lista de productos
     } catch (error) {
-      console.log(error)
-      if (selectedProduct) {
-        Swal.fire({
-          title: "Error al actualizar el producto",
-          text: "El producto no pudo ser actualizado",
-          icon: "error",
-          timer: 1500
-        })
-      } else {
-        Swal.fire({
-          title: "Error al agregar el producto",
-          text: "El producto no pudo ser agregado",
-          icon: "error",
-          timer: 1500
-        })
-      }
+      console.error("Error en la carga del producto:", error);
+      const errorMessage = selectedProduct
+        ? "Error al actualizar el producto"
+        : "Error al agregar el producto";
+      Swal.fire({
+        title: errorMessage,
+        text: "El producto no pudo ser procesado",
+        icon: "error",
+        timer: 1500
+      });
     }
   }
+  
 
   //Editar Productos
   function handleEditProduct(product) {
@@ -196,11 +200,6 @@ export default function ProductAdmin() {
                 }
               </select>
               {errors.category?.type === "required" && <div className="input-error">El campo es requerido</div>}
-            </div>
-            <div className="input-group">
-              <label htmlFor="createdAt" className="input-label">Fecha de Ingreso</label>
-              <input type="date" {...register("createdAt", { required: true })} className="input-group" />
-              {errors.createdAt?.type === "required" && <div className="input-error">El campo es requerido</div>}
             </div>
             <div className="input-group">
               <label htmlFor="image" className="input-label">
