@@ -2,36 +2,39 @@ import { faCartShopping, faPenToSquare } from "@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { useOrder } from "../../context/OrderContext";
+import { formatDate } from "../../utils/formatDate";
+
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function ProductCard({ prod }) {
     const { addOrderItem } = useOrder()
 
     return (
         <>
-            <NavLink to={`/product-detail/${prod?.id}`}></NavLink>
+            <NavLink to={`/product-detail/${prod?._id}`}></NavLink>
             <article className="product-card">
-                <NavLink to={`/product-detail/${prod?.id}`}>
+                <NavLink to={`/product-detail/${prod?._id}`}>
                     <div className="card-header">
                         <div className="product-image">
                             <img
-                                src={prod?.image}
-                                alt={prod?.image}
+                                src={`${URL}/images/products/${prod?.image}`}
+                                alt={prod?.name}
                             />
                         </div>
                     </div>
                 </NavLink>
                 <div className="card-body">
-                    <NavLink to={`/product-detail/${prod?.id}`}></NavLink>
+                    <NavLink to={`/product-detail/${prod?._id}`}></NavLink>
                     <div className="product-name">
-                        <NavLink to={`/product-detail/${prod?.id}`} className="product-link"></NavLink>
-                        <NavLink to={`/product-detail/${prod?.id}`} className="product-link">{prod?.name}</NavLink>
+                        <NavLink to={`/product-detail/${prod?._id}`} className="product-link"></NavLink>
+                        <NavLink to={`/product-detail/${prod?._id}`} className="product-link">{prod?.name}</NavLink>
                     </div>
                     <div className="product-data-container">
                         <button className="product-category">
                             {prod?.category}
                         </button>
                         <div className="product-entry-date">
-                            {new Date(prod?.createdAt.replace(/-/g, '/')).toLocaleDateString('es-ES')}
+                            {formatDate(prod.createdAt)}
                         </div>
                     </div>
                     <div className="product-description">
@@ -49,7 +52,7 @@ export default function ProductCard({ prod }) {
                         <button className="buy-button" onClick={() => addOrderItem(prod)}>
                             <FontAwesomeIcon icon={faCartShopping} />
                         </button>
-                        <NavLink to={`/product-detail/${prod.id}`} className="product-detail-link">
+                        <NavLink to={`/product-detail/${prod._id}`} className="product-detail-link">
                             <button className="buy-button">
                                 <FontAwesomeIcon icon={faPenToSquare} />
                             </button>

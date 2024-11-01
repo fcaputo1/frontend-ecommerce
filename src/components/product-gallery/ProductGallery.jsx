@@ -3,8 +3,7 @@ import ProductCard from "../product-card/ProductCard";
 import axios from "axios";
 import { useUser } from "../../context/UserContext";
 
-const URL = import.meta.env.VITE_SERVER_URL
-const URL2 = import.meta.env.VITE_LOCAL_SERVER
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function ProductGallery() {
 
@@ -19,12 +18,11 @@ export default function ProductGallery() {
     async function getProducts() {
         try {
 
-            //const response = await axios.get(`${URL}/products?skip=${skip}`)
             const response = await axios.get(`${URL}/products`)
             
             setProducts(response.data)
 
-            const userResponse = await axios.get(`${URL2}/users`, {
+            const userResponse = await axios.get(`${URL}/users`, {
                 headers: {
                     Authorization: token
                 }

@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useOrder } from "../../context/OrderContext";
 
-const URL = import.meta.env.VITE_SERVER_URL
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function ProductDetail() {
     const { addOrderItem } = useOrder()
     const { id } = useParams()
     const [ product, setProduct ] = useState([])
-
+    
     useEffect(() => {
         getProduct()
     }, [])
@@ -22,7 +22,7 @@ export default function ProductDetail() {
         try {
             //carga de productos
             const response = await axios.get(`${URL}/products/${id}`)
-            setProduct(response.data)
+            setProduct(response.data.product)
             
         } catch (error) {
             console.log(error)
@@ -46,7 +46,7 @@ export default function ProductDetail() {
             <section className="product-header">
                 <div className="product-header-image">
                     <img
-                        src={product?.image}
+                        src={`${URL}/images/products/${product.image}`}
                         alt={product?.name}
                     />
                 </div>
