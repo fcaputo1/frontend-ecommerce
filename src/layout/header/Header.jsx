@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import Logo from '../../assets/images/logo/logo.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import userImg from '../../assets/images/default-user.png'
 import { useOrder } from "../../context/OrderContext";
 import { useUser } from "../../context/UserContext";
 
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 export default function Header() {
   const { setToggleModal, count } = useOrder()
@@ -83,7 +83,7 @@ export default function Header() {
           <FontAwesomeIcon icon={faCartShopping} className="cart-icon" onClick={() => setToggleModal((modal) => !modal)} />
         </div>
         <div className="avatar">
-          <img src={userImg} alt="" />
+          <img src={`${URL}/images/users/${user?.avatar}`} alt={user?.name} />
         </div>
       </div>
     </header>

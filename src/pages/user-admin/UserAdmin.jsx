@@ -23,12 +23,12 @@ export default function UserAdmin() {
         if (selectedUser) {
             setValue("name", selectedUser.name),
                 setValue("email", selectedUser.email),
-                setValue("password", selectedUser.password),
+                //setValue("password", selectedUser.password),
                 setValue("avatar", selectedUser.avatar),
                 setValue("country", selectedUser.country),
                 setValue("birthday", selectedUser.birthday),
-                setValue("observations", selectedUser.observations),
-                setValue("repeatpassword", selectedUser.password)
+                setValue("observations", selectedUser.observations)
+                //setValue("repeatpassword", selectedUser.password)
         }
     }, [selectedUser])
 
@@ -86,66 +86,66 @@ export default function UserAdmin() {
 
     //Agregar o actualizar usuarios
     async function onUserSubmit(user) {
-
         try {
-
-            const formData = new FormData()
-            formData.append("name", user.name)
-            formData.append("email", user.email)
-            formData.append("password", user.password)
-            formData.append("birthday", user.birthday)
-            formData.append("country", user.country)
-            if(user.avatar[0]) {
-                formData.append("avatar", user.avatar[0])
+            const formData = new FormData();
+            formData.append("name", user.name);
+            formData.append("email", user.email);
+            if (!selectedUser) {
+                // Solo agregar password si es un usuario nuevo
+                formData.append("password", user.password);
             }
-            formData.append("observations", user.observations)
+            formData.append("birthday", user.birthday);
+            formData.append("country", user.country);
+            if (user.avatar && user.avatar[0]) {
+                formData.append("avatar", user.avatar[0]);
+            }
+            formData.append("observations", user.observations);
 
             if (selectedUser) {
-                const { id } = selectedUser
-                const response = await axios.put(`${URL}/users/${id}`, formData)
+                const { _id } = selectedUser;
+                await axios.put(`${URL}/users/${_id}`, formData, {
+                    headers: {
+                        Authorization: token
+                    }
+                });
 
                 Swal.fire({
-                    title: "Actualizacion correcta",
+                    title: "Actualización correcta",
                     text: "El usuario fue actualizado correctamente",
                     icon: "success",
                     timer: 1500
-                })
-                setSelectedUser(null)
+                });
+                setSelectedUser(null);
 
             } else {
-                const userData = await axios.post(`${URL}/users`, formData)
-                console.log(userData)
+                await axios.post(`${URL}/users`, formData, {
+                    headers: {
+                        Authorization: token
+                    }
+                });
 
                 Swal.fire({
                     title: "Usuario Registrado",
                     text: "El usuario fue registrado correctamente",
                     icon: "success",
                     timer: 1500
-                })
+                });
             }
 
-            reset()
-            getUsers()
+            reset();
+            getUsers();
 
         } catch (error) {
-            console.log(error)
-            if (selectedUser) {
-                Swal.fire({
-                    title: "Error al actualizar el usuario",
-                    text: "El usuario no pudo ser actualizado",
-                    icon: "error",
-                    timer: 1500
-                })
-            } else {
-                Swal.fire({
-                    title: "Error al crear el usuario",
-                    text: "El usuario no pudo ser creado",
-                    icon: "error",
-                    timer: 1500
-                })
-            }
+            console.log(error);
+            Swal.fire({
+                title: selectedUser ? "Error al actualizar el usuario" : "Error al crear el usuario",
+                text: "El usuario no pudo ser procesado",
+                icon: "error",
+                timer: 1500
+            });
         }
     }
+
 
     //Editar usuarios
     function handleEditUser(user) {
