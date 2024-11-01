@@ -1,9 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 import Logo from '../../assets/images/logo/logo.png'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { useOrder } from "../../context/OrderContext";
-import { useUser } from "../../context/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { useOrder } from "../../context/OrderContext"
+import { useUser } from "../../context/UserContext"
+import defaultAvatar from '../../assets/images/default-user.png'
 
 const URL = import.meta.env.VITE_LOCAL_SERVER
 
@@ -83,7 +84,10 @@ export default function Header() {
           <FontAwesomeIcon icon={faCartShopping} className="cart-icon" onClick={() => setToggleModal((modal) => !modal)} />
         </div>
         <div className="avatar">
-          <img src={`${URL}/images/users/${user?.avatar}`} alt={user?.name} />
+          <img
+            src={user?.avatar ? `${URL}/images/users/${user.avatar}` : defaultAvatar}
+            alt={user?.name || ""}
+          />
         </div>
       </div>
     </header>
