@@ -1,5 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useUser } from "./UserContext";
+import axios from "axios";
+
+const URL = import.meta.env.VITE_LOCAL_SERVER
 
 const OrderContext = createContext()
 
@@ -7,26 +11,14 @@ export const useOrder = () => useContext(OrderContext)
 
 export default function OrderProvider({ children }) {
 
+    const { user, token } = useUser()
     const [ count, setCount ] = useState(0)
     const [ total, setTotal ] = useState(0)
     const [ order, setOrder ] = useState([])
     const [ toggleModal, setToggleModal ] = useState(false)
 
-    //Carga orden desde Local Storage
-    useEffect(() => {
-        const storedOrder = localStorage.getItem("order");
-        if (storedOrder) {
-            setOrder(JSON.parse(storedOrder));
-        }
-    }, []);
-
     //Guarda la orden en Local Storage y calcula Totales
     useEffect(() => {
-        if (order.length > 0) {
-            localStorage.setItem("order", JSON.stringify(order));
-        } else {
-            localStorage.removeItem("order");  // Elimina el localStorage si no hay productos
-        }
         calculateCount();
         calculateTotal();
     }, [order]);
@@ -35,11 +27,11 @@ export default function OrderProvider({ children }) {
     function addOrderItem(product) {
 
         console.log("Add product", product.name)
-        const productExists = order.find(prod => prod.id === product.id)
+        const productExists = order.find(prod => prod._id === product._id)
 
         if(productExists) {
             const updatedOrder = order.map(prod => {
-                if (prod.id === product.id) {
+                if (prod._id === product._id) {
                     prod.quantity++
                 }
                 return prod
@@ -80,16 +72,63 @@ export default function OrderProvider({ children }) {
     }
 
     //Remover item de la orden
-    function removeItemFromOrder(id) {
-        const orderFiltered = order.filter(prod => prod.id !== id)
+    function removeItemFromOrder(_id) {
+        const orderFiltered = order.filter(prod => prod._id !== _id)
         setOrder(orderFiltered)
     }
 
     //Cambiar cantidad de un item en la orden
-    function changeItemQuantity(id, quantity) {
-        const product = order.find(prod => prod.id === id)
+    function changeItemQuantity(_id, quantity) {
+        const product = order.find(prod => prod._id === _id)
         product.quantity = quantity
         setOrder([ ...order])
+    }
+
+    async function createOrder() {
+        try {
+            if(!user._id) {
+                Swal.fire({
+                    title: "No iniciaste sesión",
+                    text: "Debes iniciar sesión para poder crear una orden",
+                    icon: "error"
+                })
+                return
+            }
+            const products = order.map(prod => {
+                return {
+                    product: prod._id,
+                    quantity: prod.quantity,
+                    price: prod.price
+                }
+            })
+            const newOrder = {
+                products,
+                user: user._id,
+                total
+            }
+            console.log(user)
+            await axios.post(
+                `${URL}/orders`, newOrder, 
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            );
+            Swal.fire({
+                title: "Orden Creada",
+                text: "La orden fue creada correctamente",
+                icon: "success",
+                timer: 1500
+            });
+        } catch (error) {
+            console.log(error)
+            Swal.fire({
+                title: "Error al crear la orden",
+                text: "La orden no pudo ser creada",
+                icon: "error"
+            })
+        }
     }
 
     return (
@@ -102,7 +141,8 @@ export default function OrderProvider({ children }) {
                 count, 
                 total,
                 removeItemFromOrder, 
-                changeItemQuantity
+                changeItemQuantity,
+                createOrder
             }}
         >
             { children }
