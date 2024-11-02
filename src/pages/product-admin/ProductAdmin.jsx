@@ -1,11 +1,11 @@
 import './ProductAdmin.css'
 import { useForm } from 'react-hook-form'
 import '../../styles/form.css'
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import AdminTable from '../../components/admin-table/AdminTable'
 import Swal from 'sweetalert2'
 import { useUser } from '../../context/UserContext'
+import useApi from '../../services/interceptor/interceptor'
 
 const URL = import.meta.env.VITE_SERVER
 
@@ -15,6 +15,7 @@ export default function ProductAdmin() {
   const [ categories, setCategories ] = useState([])
   const { register, setValue, reset, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
   const { token } = useUser()
+  const api = useApi()
 
   useEffect(() => {
     getProducts()
@@ -37,7 +38,7 @@ export default function ProductAdmin() {
 
   async function getCategories() {
     try {
-      const response = await axios.get(`${URL}/categories`)
+      const response = await api.get(`${URL}/categories`)
       console.log(response.data)
       setCategories(response.data.categories)
     } catch (error) {
@@ -55,7 +56,7 @@ export default function ProductAdmin() {
   async function getProducts() {
 
     try {
-      const response = await axios.get(`${URL}/products`)
+      const response = await api.get(`${URL}/products`)
       setProducts(response.data)
 
     } catch (error) {
@@ -80,7 +81,7 @@ export default function ProductAdmin() {
     }).then(async (result) => {
       try {
         if (result.isConfirmed) {
-          const response = await axios.delete(`${URL}/products/${_id}`)
+          const response = await api.delete(`${URL}/products/${_id}`)
           getProducts()
         }
       } catch (error) {
@@ -112,7 +113,7 @@ export default function ProductAdmin() {
   
       if (selectedProduct) {
         const { _id } = selectedProduct;
-        await axios.put(`${URL}/products/${_id}`, formData, {
+        await api.put(`${URL}/products/${_id}`, formData, {
           headers: {
             Authorization: token
           }
@@ -126,7 +127,7 @@ export default function ProductAdmin() {
         });
         setSelectedProduct(null); // Limpiar el producto seleccionado después de la edición
       } else {
-        await axios.post(`${URL}/products`, formData, {
+        await api.post(`${URL}/products`, formData, {
           headers: {
             Authorization: token
           }

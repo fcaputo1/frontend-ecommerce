@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../product-card/ProductCard"
-import axios from "axios";
+import useAPI from "../../services/interceptor/interceptor"
 
 const URL = import.meta.env.VITE_SERVER
 
 export default function ProductGallery() {
 
     const [ products, setProducts ] = useState([])
+    const api = useAPI()
     
     useEffect(() => {
         getProducts()
@@ -14,7 +15,7 @@ export default function ProductGallery() {
 
     async function getProducts() {
         try {
-            const response = await axios.get(`${URL}/products`)
+            const response = await api.get(`${URL}/products`)
             setProducts(response.data)
         } catch (error) {
             console.log(error)

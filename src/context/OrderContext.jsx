@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useUser } from "./UserContext";
-import axios from "axios";
+import useApi from "../services/interceptor/interceptor";
 
 const URL = import.meta.env.VITE_SERVER
 
@@ -16,6 +16,7 @@ export default function OrderProvider({ children }) {
     const [ total, setTotal ] = useState(0)
     const [ order, setOrder ] = useState([])
     const [ toggleModal, setToggleModal ] = useState(false)
+    const api = useApi()
 
     //Guarda la orden en Local Storage y calcula Totales
     useEffect(() => {
@@ -107,7 +108,7 @@ export default function OrderProvider({ children }) {
                 total
             }
             console.log(user)
-            await axios.post(
+            await api.post(
                 `${URL}/orders`, newOrder, 
                 {
                     headers: {

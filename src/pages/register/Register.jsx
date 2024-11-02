@@ -3,13 +3,14 @@ import '../../styles/form.css'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
 import { useEffect } from 'react'
-import axios from 'axios'
+import useApi from '../../services/interceptor/interceptor'
 
 const URL = import.meta.env.VITE_SERVER
 
 export default function Register() {
 
   const { register, watch, setFocus, reset, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" })
+  const api = useApi()
 
   useEffect(() => {
     setFocus("name")
@@ -29,7 +30,7 @@ export default function Register() {
       }
       formData.append("observations", user.observations)
 
-      const newUser = await axios.post(`${URL}/users`, formData)
+      const newUser = await api.post(`${URL}/users`, formData)
       console.log(formData.avatar)
       
 

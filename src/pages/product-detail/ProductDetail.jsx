@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom"
 import './product.css'
 import Swal from "sweetalert2";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useOrder } from "../../context/OrderContext";
+import useApi from "../../services/interceptor/interceptor";
 
 const URL = import.meta.env.VITE_SERVER
 
@@ -12,6 +12,7 @@ export default function ProductDetail() {
     const { addOrderItem } = useOrder()
     const { id } = useParams()
     const [ product, setProduct ] = useState([])
+    const api = useApi()
     
     useEffect(() => {
         getProduct()
@@ -21,7 +22,7 @@ export default function ProductDetail() {
 
         try {
             //carga de productos
-            const response = await axios.get(`${URL}/products/${id}`)
+            const response = await api.get(`${URL}/products/${id}`)
             setProduct(response.data.product)
             
         } catch (error) {
