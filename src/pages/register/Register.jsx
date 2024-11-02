@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { useEffect } from 'react'
 import axios from 'axios'
 
-const URL = import.meta.env.VITE_LOCAL_SERVER
+const URL = import.meta.env.VITE_SERVER
 
 export default function Register() {
 

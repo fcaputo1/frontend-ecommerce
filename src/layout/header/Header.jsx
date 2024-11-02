@@ -6,7 +6,7 @@ import { useOrder } from "../../context/OrderContext"
 import { useUser } from "../../context/UserContext"
 import defaultAvatar from '../../assets/images/default-user.png'
 
-const URL = import.meta.env.VITE_LOCAL_SERVER
+const URL = import.meta.env.VITE_SERVER
 
 export default function Header() {
   const { setToggleModal, count } = useOrder()

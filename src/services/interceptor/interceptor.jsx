@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_LOCAL_SERVER
+    baseURL: import.meta.env.VITE_SERVER
 });
 
 const useApi = () => {

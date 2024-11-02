@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 import UserTable from '../../components/user-admin-table/UserTable'
 import { useUser } from '../../context/UserContext'
 
-const URL = import.meta.env.VITE_LOCAL_SERVER
+const URL = import.meta.env.VITE_SERVER
 
 export default function UserAdmin() {
     const [users, setUsers] = useState([])

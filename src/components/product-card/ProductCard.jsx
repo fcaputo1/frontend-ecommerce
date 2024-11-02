@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useOrder } from "../../context/OrderContext";
 import { formatDate } from "../../utils/formatDate";
 
-const URL = import.meta.env.VITE_LOCAL_SERVER
+const URL = import.meta.env.VITE_SERVER
 
 export default function ProductCard({ prod }) {
     const { addOrderItem } = useOrder()

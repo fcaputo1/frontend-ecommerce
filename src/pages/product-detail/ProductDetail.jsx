@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useOrder } from "../../context/OrderContext";
 
-const URL = import.meta.env.VITE_LOCAL_SERVER
+const URL = import.meta.env.VITE_SERVER
 
 export default function ProductDetail() {
     const { addOrderItem } = useOrder()
