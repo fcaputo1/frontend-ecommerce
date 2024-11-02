@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+#root {
+    font-family: "Ubuntu", sans-serif;
+}
+
 .login-container {
     width: 100vw;
+    font-family: "Ubuntu", sans-serif;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -7,93 +14,47 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: hidden;
-    background: linear-gradient(315deg, rgb(21, 88, 244) 3%, rgba(60, 132, 206, 1) 38%, rgb(115, 48, 238) 68%, rgb(243, 25, 255) 98%);
+    background: linear-gradient(290deg, black 68%, #a6051a 98%);
     animation: gradient 15s ease infinite;
     background-size: 400% 400%;
     background-attachment: fixed;
     position: relative;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 0%;
-    }
-
-    50% {
-        background-position: 100% 100%;
-    }
-
-    100% {
-        background-position: 0% 0%;
-    }
-}
-
-.wave {
-    background: rgb(255 255 255 / 25%);
-    border-radius: 1300% 1300% 0 0;
-    position: absolute;
-    width: 300%;
-    height: calc(40vh);
-    animation: wave 10s -3s linear infinite;
-    transform: translate3d(0, 0, 0);
-    opacity: 0.8;
-    bottom: 0;
-    left: 0;
-}
-
-.wave:nth-of-type(2) {
-    height: calc(40vh + 1.25em);
-    animation: wave 18s linear reverse infinite;
-    opacity: 0.8;
-}
-
-.wave:nth-of-type(3) {
-    height: calc(40vh + 2.5em);
-    animation: wave 20s -1s reverse infinite;
-    opacity: 0.9;
-}
-
-@keyframes wave {
-    2% {
-        transform: translateX(1);
-    }
-
-    25% {
-        transform: translateX(-25%);
-    }
-
-    50% {
-        transform: translateX(-50%);
-    }
-
-    75% {
-        transform: translateX(-25%);
-    }
-
-    100% {
-        transform: translateX(1);
-    }
-}
-
 .login-form {
     z-index: 1;
     padding: 1rem;
-    background-color: rgb(23, 23, 23);
-    color: white;
+    font-family: "Ubuntu", sans-serif;
+    background-color: white;
+    color: black;
     border-radius: 0.5rem;
-    border: 1px solid #333;
+    border: 3px solid black;
     max-width: 400px;
-    box-shadow: 1px 1px 7px #27272791;
-    ;
+    box-shadow: 1px 3px 10px black;
+    font-style: italic;
+
+    &::first-letter {
+        color: #a6051a
+    }
+
+    .form-input {
+        margin-top: 10px;
+    }
+
+    .form-label {
+        font-weight: bold;
+
+        &::first-letter {
+            color: #a6051a
+        }
+    }
 
     h1 {
         text-align: center;
         margin-bottom: 1rem;
-        border-bottom: 1px solid royalblue;
-        padding-bottom: .5rem;
-        /* line-height: 1.5; */
+        border-bottom: 3px solid black;
+        padding-bottom: 1rem;
     }
 }
 
@@ -101,17 +62,20 @@
 
 .login-form input {
     width: 100%;
-    padding: 0.5rem;
     margin-bottom: 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid #333;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px;
 }
 
 .login-form button {
     width: 100%;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    border: 1px solid #333;
-    background-color: royalblue;
-    color: white;
+    border: 3px solid black;
+    background-color: #ffeb00;
+    color: black;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 16px;
 }

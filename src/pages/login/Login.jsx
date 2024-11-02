@@ -8,14 +8,11 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="wave"></div>
-      <div className="wave"></div>
-      <div className="wave"></div>
       <form className="login-form" onSubmit={handleSubmit(login)}>
         <h1>Login</h1>
-        <label>Correo electrónico</label>
+        <label className="form-label">Correo electrónico</label>
         <input
-          type="email"
+          type="email" className="form-input"
           placeholder="Correo electrónico"
           {...register("email", {
             required: "El email es requerido",
@@ -26,9 +23,9 @@ export default function Login() {
           })}
         />
 
-        <label>Contraseña</label>
+        <label className="form-label">Contraseña</label>
         <input
-          type="password"
+          type="password" className="form-input"
           placeholder="Contraseña"
           {...register("password", { required: "El password es requerido" })}
         />
