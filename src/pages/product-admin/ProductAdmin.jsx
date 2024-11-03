@@ -81,7 +81,13 @@ export default function ProductAdmin() {
     }).then(async (result) => {
       try {
         if (result.isConfirmed) {
-          const response = await api.delete(`${URL}/products/${_id}`)
+          const response = await api.delete(`${URL}/products/${_id}`, 
+            {
+              headers: {
+                Authorization: token
+              }
+            }
+          )
           getProducts()
         }
       } catch (error) {

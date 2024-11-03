@@ -16,6 +16,7 @@ export default function OrderProvider({ children }) {
     const [order, setOrder] = useState([])
     const [toggleModal, setToggleModal] = useState(false)
     const api = useApi()
+    const { token } = useUser()
 
     // Calcular cantidades y totales cuando cambia la orden
     useEffect(() => {
@@ -69,7 +70,13 @@ export default function OrderProvider({ children }) {
     // Obtener todas las órdenes y mostrarlas en consola
     async function getOrders() {
         try {
-            const response = await api.get(`${URL}/orders`)
+            const response = await api.get(`${URL}/orders`,
+                {
+                    headers: {
+                      Authorization: token
+                    }
+                  }
+            )
             console.log("Órdenes creadas:", response.data)
         } catch (error) {
             console.error("Error al obtener las órdenes:", error)
