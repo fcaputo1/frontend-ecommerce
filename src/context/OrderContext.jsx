@@ -70,13 +70,16 @@ export default function OrderProvider({ children }) {
     // Obtener todas las órdenes y mostrarlas en consola
     async function getOrders() {
         try {
-            const response = await api.get(`${URL}/orders`,
-                {
-                    headers: {
-                      Authorization: token
-                    }
-                  }
-            )
+            if (!token) {
+                console.log("Sesión no válida, no se puede obtener las órdenes")
+                return
+            }
+
+            const response = await api.get(`${URL}/orders`, {
+                headers: {
+                    Authorization: token
+                }
+            })
             console.log("Órdenes creadas:", response.data)
         } catch (error) {
             console.error("Error al obtener las órdenes:", error)
@@ -86,13 +89,10 @@ export default function OrderProvider({ children }) {
     // Crear orden
     async function createOrder() {
         try {
-            if (!user?._id) {
-                Swal.fire({
-                    title: "No iniciaste sesión",
-                    text: "Debes iniciar sesión para poder crear una orden",
-                    icon: "error"
-                })
-                return
+            // Verificar si el usuario sigue autenticado antes de intentar crear la orden
+            if (!user?._id || !token) {
+                console.log("Sesión no válida, no se puede crear la orden")
+                return // Detener la función si la sesión ha expirado o no hay token
             }
 
             const products = order.map((prod) => ({
@@ -112,20 +112,25 @@ export default function OrderProvider({ children }) {
             Swal.fire({
                 title: "Orden Creada",
                 text: "La orden fue creada correctamente",
-                icon: "success",
-                timer: 1500
+                icon: "success"
             })
 
-            // Llama a getOrders para mostrar todas las órdenes en la consola
+            // Llamada para mostrar todas las órdenes en la consola
             getOrders()
 
+            // Limpiar la orden después de crearla
+            setOrder([])
+
         } catch (error) {
-            console.error("Error al crear la orden:", error)
-            Swal.fire({
-                title: "Error al crear la orden",
-                text: "La orden no pudo ser creada",
-                icon: "error"
-            })
+            // Solo mostrar el mensaje si el error no es de sesión expirada
+            if (error.response?.status !== 401) {
+                console.error("Error al crear la orden:", error)
+                Swal.fire({
+                    title: "Error al crear la orden",
+                    text: "La orden no pudo ser creada",
+                    icon: "error"
+                })
+            }
         }
     }
 

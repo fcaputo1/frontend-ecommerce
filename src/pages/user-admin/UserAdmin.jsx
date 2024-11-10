@@ -72,6 +72,12 @@ export default function UserAdmin() {
                             Authorization: token
                         }
                     })
+                    Swal.fire({
+                        title: "Usuario Eliminado",
+                        text: "El usuario fue eliminado correctamente",
+                        icon: "success",
+                        timer: 1500
+                    })
                     getUsers()
                 }
             } catch (error) {
