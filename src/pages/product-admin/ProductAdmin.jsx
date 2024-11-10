@@ -42,7 +42,7 @@ export default function ProductAdmin() {
       console.log(response.data)
       setCategories(response.data.categories)
     } catch (error) {
-      console.log(error);
+      console.log(error)
       Swal.fire({
         title: "Error al cargar las categorías",
         text: "No se pudieron cargar las categorías",
@@ -87,7 +87,13 @@ export default function ProductAdmin() {
                 Authorization: token
               }
             }
-          )
+          );
+          Swal.fire({
+            title: "Producto Eliminado",
+            text: "El producto fue eliminado correctamente",
+            icon: "success",
+            timer: 1500
+          })
           getProducts()
         }
       } catch (error) {
@@ -104,17 +110,17 @@ export default function ProductAdmin() {
   //Agregar o Editar productos
   async function onProductSubmit(product) {
     try {
-      const formData = new FormData();
-      formData.append("name", product.name);
-      formData.append("price", product.price);
-      formData.append("description", product.description);
-      formData.append("category", product.category);
+      const formData = new FormData()
+      formData.append("name", product.name)
+      formData.append("price", product.price)
+      formData.append("description", product.description)
+      formData.append("category", product.category)
   
       // Verificar y agregar la imagen
       if (product.image && product.image[0]) {
-        formData.append("image", product.image[0]);
+        formData.append("image", product.image[0])
       } else {
-        console.log("No se seleccionó ninguna imagen.");
+        console.log("No se seleccionó ninguna imagen.")
       }
   
       if (selectedProduct) {
